@@ -165,7 +165,7 @@ const CarouselPage = () => {
         <div className="flex flex-shrink-0 justify-center items-center space-x-2">
           <span
             className={classNames(
-              "border border-black px-5 py-1",
+              "border border-black px-5 py-1 hover:cursor-pointer",
               activeOption === "justText" ? "active:bg-gray-400" : ""
             )}
             onClick={() => handleImageTextClick("justText")}
@@ -173,7 +173,7 @@ const CarouselPage = () => {
             Just Text
           </span>
           <span
-            className={` border border-black px-5 py-1 active:bg-gray-400 ${
+            className={` border border-black px-5 py-1 active:bg-gray-400 hover:cursor-pointer ${
               activeOption === "justText" ? "active:bg-gray-400" : ""
             }`}
             onClick={() => handleImageTextClick("textWithImage")}
@@ -181,7 +181,7 @@ const CarouselPage = () => {
             Text with Image
           </span>
           <span
-            className={`border border-black px-5 py-1 ${
+            className={`border border-black px-5 py-1 hover:cursor-pointer ${
               activeOption === "justImage" ? "active:bg-gray-400" : ""
             }`}
             onClick={() => handleImageTextClick("justImage")}
@@ -227,7 +227,7 @@ const CarouselPage = () => {
                     value={inputData.titleInput}
                     onChange={handleChange}
                   />
-                  <button className="btn border bg-purple-200" type="submit" onClick={handleSubmit}>
+                  <button className="btn border bg-purple-200 hover:cursor-pointer" type="submit" onClick={handleSubmit}>
                     Generate Title
                   </button>
                 </div>
@@ -258,7 +258,7 @@ const CarouselPage = () => {
                     value={inputData.descriptionInput}
                     onChange={handleChange}
                   />
-                  <button type="submit" className="btn border bg-purple-200" onClick={handleDescriptionSubmit}>
+                  <button type="submit" className="btn border bg-purple-200 hover:cursor-pointer" onClick={handleDescriptionSubmit}>
                     Generate Description
                   </button>
                 </div>
@@ -286,7 +286,7 @@ const CarouselPage = () => {
                 />
                 <div className="flex flex-shrink-0 justify-center items-center space-x-2">
                   <span
-                    className=" border border-black px-5 py-1 active:bg-gray-400 "
+                    className=" border border-black px-5 py-1 active:bg-gray-400 hover:cursor-pointer"
                     onClick={() => {
                       setImagePlacementClass("justify-start");
                       console.log("left clicked");
@@ -295,13 +295,13 @@ const CarouselPage = () => {
                     Left
                   </span>
                   <span
-                    className=" border border-black px-5 py-1 active:bg-gray-400"
+                    className=" border border-black px-5 py-1 active:bg-gray-400 hover:cursor-pointer"
                     onClick={() => setImagePlacementClass("justify-center")}
                   >
                     Center
                   </span>
                   <span
-                    className=" border border-black px-5 py-1 active:bg-gray-400"
+                    className=" border border-black px-5 py-1 active:bg-gray-400 hover:cursor-pointer"
                     onClick={() => setImagePlacementClass("justify-end")}
                   >
                     Right
