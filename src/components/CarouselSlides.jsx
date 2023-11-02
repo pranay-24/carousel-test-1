@@ -49,8 +49,8 @@ const CarouselSlides = () => {
               <p className="font-sans text-lg">{slides[currentSlideIndex].title}</p>
               <p className="font-sans text-lg">{slides[currentSlideIndex].description}</p>
               {slides[currentSlideIndex].imageUrl && (
-                <div className={classNames("flex w-300 h-auto overflow-hidden")}>
-                  <img className={"rounded-2xl"} src={slides[currentSlideIndex].imageUrl} alt="" />
+                <div className="flex w-[450px] h-auto overflow-hidden">
+                  <img className={"rounded-2xl w-full "} src={slides[currentSlideIndex].imageUrl} alt="" />
                 </div>
               )}
             </div>
