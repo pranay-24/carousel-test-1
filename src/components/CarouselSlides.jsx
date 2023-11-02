@@ -1,18 +1,21 @@
 import React, { useState } from "react";
-import CarouselSlide from "./CarouselSlide";
-import {setCurrentSlideIndex } from "./carousel/AidataSlice";
+//import CarouselSlide from "./CarouselSlide";
+import {setCurrentSlideIndex, selectSlideByIndex } from "./carousel/AidataSlice";
 import {useSelector, useDispatch} from 'react-redux';   
 
-const CarouselPage = () => {
-    const slides = useSelector((state) => state.yourSlide.slides);
-    const currentSlideIndex = useSelector((state) => state.yourSlide.currentIndex);
+const CarouselSlides = () => {
+    const slides = useSelector((state) => state.Aidata.slides);
+    const currentSlideIndex = useSelector((state) => state.Aidata.currentIndex);
     const dispatch = useDispatch();
 
-  const [slides, setSlides] = useState([
-    { title: "Title 1", description: "Description 1", imageUrl: "url1" },
-    { title: "Title 2", description: "Description 2", imageUrl: "url2" },
-    // Add more slides as needed
-  ]);
+    const classNames = (...classes)=>{
+        classes.filter(Boolean).join("");
+    }
+//   const [slides, setSlides] = useState([
+//     { title: "Title 1", description: "Description 1", imageUrl: "url1" },
+//     { title: "Title 2", description: "Description 2", imageUrl: "url2" },
+//     // Add more slides as needed
+//   ]);
 
   const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -25,17 +28,17 @@ const CarouselPage = () => {
     dispatch(setCurrentSlideIndex(currentSlideIndex - 1));
   };
 
-  const handleTitleChange = (e) => {
-    const updatedSlides = [...slides];
-    updatedSlides[currentSlide].title = e.target.value;
-    setSlides(updatedSlides);
-  };
+//   const handleTitleChange = (e) => {
+//     const updatedSlides = [...slides];
+//     updatedSlides[currentSlide].title = e.target.value;
+//     setSlides(updatedSlides);
+//   };
 
-  const handleDescriptionChange = (e) => {
-    const updatedSlides = [...slides];
-    updatedSlides[currentSlide].description = e.target.value;
-    setSlides(updatedSlides);
-  };
+//   const handleDescriptionChange = (e) => {
+//     const updatedSlides = [...slides];
+//     updatedSlides[currentSlide].description = e.target.value;
+//     setSlides(updatedSlides);
+//   };
 
   return (
     <div>
@@ -46,7 +49,7 @@ const CarouselPage = () => {
               <p className="font-sans text-lg">{slides[currentSlideIndex].title}</p>
               <p className="font-sans text-lg">{slides[currentSlideIndex].description}</p>
               {slides[currentSlideIndex].imageUrl && (
-                <div className={classNames("flex w-300 h-auto overflow-hidden", imagePlacementClass)}>
+                <div className={classNames("flex w-300 h-auto overflow-hidden")}>
                   <img className={"rounded-2xl"} src={slides[currentSlideIndex].imageUrl} alt="" />
                 </div>
               )}
@@ -63,4 +66,4 @@ const CarouselPage = () => {
   );
 };
 
-export default CarouselPage;
+export default CarouselSlides;

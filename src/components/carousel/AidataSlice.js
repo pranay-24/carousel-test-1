@@ -10,13 +10,13 @@ currentIndex: 0,
 slides:[
     {
         title: 'Title 1',
-        description: 'Description 1',
-        imageUrl: 'url1'
+        description: ' Navigating the intricate pathways of career choices, skill development, and professional growth is vital in todays dynamic work landscape. This comprehensive guide delves into strategies, assessments, and resources to help you chart a fulfilling career path aligned with your aspirations and talents.',
+        imageUrl: 'image1.jpg'
       },
       {
         title: 'Title 2',
-        description: 'Description 2',
-        imageUrl: 'url2'
+        description: 'Embark on a thrilling journey through the world of sports and adventure. From adrenaline-pumping exploits to captivating narratives of triumph and resilience, this collection explores the diverse landscapes, challenges, and triumphs in the realm of athletic endeavors, pushing the boundaries of human potential and the spirit of adventure.',
+        imageUrl: 'image2.jpg'
       }
 ]
 }
