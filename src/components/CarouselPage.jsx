@@ -10,6 +10,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   fetchTitleAsync,
   fetchDescriptionAsync,
+  fetchMockData,
   selectTitle,
   selectDescription,
 } from "./carousel/AidataSlice";
@@ -74,14 +75,30 @@ const CarouselPage = () => {
     setInputData({ ...inputData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = () => {
-    const specificInput = {
-      inputs: inputData.titleInput,
-    };
-    console.log(specificInput);
-    dispatch(fetchTitleAsync(specificInput));
-    // console.log(textData);
-  };
+  // const handleSubmit = () => {
+  //   const specificInput = {
+  //     inputs: inputData.titleInput,
+  //   };
+  //   console.log(specificInput);
+  //   dispatch(fetchTitleAsync(specificInput));
+  //   // console.log(textData);
+  // };
+
+  // const handleSubmit = () => {
+  //   // const specificInput = {
+  //   //   inputs: inputData.titleInput,
+  //   // };
+  //   //console.log(specificInput);
+  //   //dispatch(fetchTitleAsync(specificInput));
+  //   dispatch(fetchTitleAsync(inputData.titleInput));
+
+  //   // console.log(textData);
+  // };
+
+
+  const handleSubmit =()=>{
+    dispatch(fetchMockData());
+  }
 
   const handleDescriptionSubmit = () => {
     const specificInput = {
@@ -129,8 +146,8 @@ const CarouselPage = () => {
       >
         Download Image
       </button>
-      <section id="carousel_slide">
-        <div className="flex-col">
+      <section id="carousel_slide ">
+        <div className="flex-col w-[1000px]">
           {
             // isTitleChecked && showText && titleText &&
             isTitleChecked && showText && (
@@ -162,7 +179,7 @@ const CarouselPage = () => {
       </section>
 
       <section>
-        <div className="flex flex-shrink-0 justify-center items-center space-x-2">
+        <div className="w-[1000px] flex flex-shrink-0 justify-center items-center space-x-2">
           <span
             className={classNames(
               "border border-black px-5 py-1 hover:cursor-pointer",
@@ -193,7 +210,7 @@ const CarouselPage = () => {
         <Disclosure>
           {({ open }) => (
             <>
-              <Disclosure.Button className="flex items-center justify-center w-full  rounded-lg bg-purple-100 px-4 py-2 text-left text-sm font-medium text-purple-900 hover:bg-purple-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75 ">
+              <Disclosure.Button className=" w-[1000px] flex items-center justify-center   rounded-lg bg-purple-100 px-4 py-2 text-left text-sm font-medium text-purple-900 hover:bg-purple-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75 ">
                 <span>Text Options</span>
                 <ChevronUpIcon
                   className={`${
@@ -201,7 +218,7 @@ const CarouselPage = () => {
                   } h-5 w-5 text-purple-500`}
                 />
               </Disclosure.Button>
-              <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500">
+              <Disclosure.Panel className="w-[1000px] px-4 pt-4 pb-2 text-sm text-gray-500">
                 <div>
                   <div className="form-check form-switch">
                     <label
@@ -270,7 +287,7 @@ const CarouselPage = () => {
         <Disclosure>
           {({ open }) => (
             <>
-              <Disclosure.Button className="flex items-center justify-center w-full  rounded-lg bg-purple-100 px-4 py-2 text-left text-sm font-medium text-purple-900 hover:bg-purple-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75 ">
+              <Disclosure.Button className="w-[1000px] flex items-center justify-center   rounded-lg bg-purple-100 px-4 py-2 text-left text-sm font-medium text-purple-900 hover:bg-purple-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75 ">
                 <span>Image Options</span>
                 <ChevronUpIcon
                   className={`${
@@ -278,7 +295,7 @@ const CarouselPage = () => {
                   } h-5 w-5 text-purple-500`}
                 />
               </Disclosure.Button>
-              <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500">
+              <Disclosure.Panel className="w-[1000px] px-4 pt-4 pb-2 text-sm text-gray-500">
                 <input
                   type="file"
                   accept="image/*"
