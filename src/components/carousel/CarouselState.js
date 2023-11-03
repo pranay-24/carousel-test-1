@@ -1,18 +1,20 @@
-import { createContext, useState } from "react";
+import { createContext, useState,useEffect } from "react";
 
 export const slideContext = createContext();
 
 export const CarouselState = (props)=>{
-
+ 
     const [selectedColor, setSelectedColor] = useState({
         background: '',
         fontColor1: '',
         fontColor2: '',
       });
-
-      const selectBox = (background, fontColor1, fontColor2) => {
-        setSelectedColor({ background, fontColor1, fontColor2 });
-        //console.log(selectedColor);
+      useEffect(() => {
+        //console.log(selectedColor.background);
+      }, [selectedColor.background]);
+      const selectBox = (sentbackground, sentfontColor1, sentfontColor2) => {
+        setSelectedColor({ background:sentbackground, fontColor1:sentfontColor1, fontColor2:sentfontColor2 });
+      // console.log(selectedColor.background);
       };
 
     return (

@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 //import CarouselSlide from "./CarouselSlide";
 import {setCurrentSlideIndex, selectSlideByIndex } from "./carousel/AidataSlice";
 import {useSelector, useDispatch} from 'react-redux';   
-
+import { slideContext } from "./carousel/CarouselState";
 const CarouselSlides = () => {
+    const {selectedColor} = useContext(slideContext);
+
     const slides = useSelector((state) => state.Aidata.slides);
     const currentSlideIndex = useSelector((state) => state.Aidata.currentIndex);
     const dispatch = useDispatch();
@@ -45,9 +47,15 @@ const CarouselSlides = () => {
       <section id="carousel_slide">
         <div className="flex-col w-[1000px]">
           {slides.length > 0 && currentSlideIndex >= 0 && (
-            <div>
-              <p className="font-sans text-lg">{slides[currentSlideIndex].title}</p>
-              <p className="font-sans text-lg">{slides[currentSlideIndex].description}</p>
+            <div style={{ backgroundColor: selectedColor.background }}>
+                <div  >
+                <p className="font-sans text-lg">{slides[currentSlideIndex].title}</p>
+                </div>
+              
+              <div >
+              <p className="font-sans text-lg" style={{ color: selectedColor.fontColor1 }}>{slides[currentSlideIndex].description}</p>
+              </div>
+              
               {slides[currentSlideIndex].imageUrl && (
                 <div className="flex w-[450px] h-auto overflow-hidden">
                   <img className={"rounded-2xl w-full "} src={slides[currentSlideIndex].imageUrl} alt="" />

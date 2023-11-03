@@ -50,7 +50,7 @@ const SelectorBox = ({ background, fontColor1, fontColor2 }) => {
         className="box w-[50px] h-[50px] cursor-pointer active:border-purple-500 active-border focus:border focus:border-purple-500 "
         style={boxStyle}
         onClick={() => {selectBox({ background, fontColor1, fontColor2 })
-    // console.log(boxStyle)
+     //console.log(boxStyle)
     }}
       >
         <span style={{ color: fontColor2 }}>A</span>
