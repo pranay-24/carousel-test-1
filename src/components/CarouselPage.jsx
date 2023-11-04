@@ -264,7 +264,8 @@ const CarouselPage = () => {
         </div>
       </section>
 
-      <section>
+      <section className="mt-5">
+        <p className="font-bold text-lg">Slide Settings</p>
         <div className="w-[1000px] flex flex-shrink-0 justify-center items-center space-x-2">
           <span
             className={classNames(
