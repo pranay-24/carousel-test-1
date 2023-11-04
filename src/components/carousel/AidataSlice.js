@@ -65,6 +65,29 @@ export const updateSlides= createAction (
         };
     })
 
+    export const updateTitle= createAction (
+    'Aidata/updateTitle',
+    (index,newTitle) => {
+        return {
+            payload: {
+              index,
+              newTitle,
+            }
+          };
+    })
+
+    export const updateDescription= createAction (
+        'Aidata/updateDescription',
+        (index,newDescription) => {
+            return {
+                payload: {
+                  index,
+                  newDescription,
+                }
+              };
+        })
+
+
     export const fetchMockData= createAsyncThunk (
         "Aidata/fetchMockData",
          async ()=>{
@@ -110,7 +133,15 @@ export const AidataSlice = createSlice({
     .addCase(updateSlides, (state, action) => {
         state.slides = action.payload;
       })
-
+      .addCase(updateTitle, (state, action) => {
+        const { index, newTitle } = action.payload;
+        console.log(index, newTitle);
+       // state.slides[index].title = newTitle;
+      })
+      .addCase(updateDescription, (state, action) => {
+        const { index, newDescription } = action.payload;
+        state.slides[index].description = newDescription;
+      })
 }
 })
 

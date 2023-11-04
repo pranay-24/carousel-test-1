@@ -12,7 +12,7 @@ function App() {
   return (
     <>
     <CarouselState>
-    <p>Go to the /carouselpage page</p>
+    {/* <p>Go to the /carouselpage page</p> */}
       
       <BrowserRouter>
     <Routes>

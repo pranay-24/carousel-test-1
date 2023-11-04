@@ -14,8 +14,11 @@ import {
   selectTitle,
   selectDescription,
   updateSlides,
-  setCurrentSlideIndex
+  setCurrentSlideIndex,
+  updateTitle,
+  updateDescription,
 } from "./carousel/AidataSlice";
+import TemplateModal from "./TemplateModal";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -51,7 +54,7 @@ const CarouselPage = () => {
   const [isTitleChecked, setIsTitleChecked] = useState(true);
   const [isDescriptionChecked, setIsDescriptionChecked] = useState(true);
   const [activeOption, setActiveOption] = useState("");
-
+  const [templateModalShow,setTemplateModalShow] = useState(false)
  
   const takeScreenshot = async (element) => {
     try {
@@ -84,15 +87,19 @@ const CarouselPage = () => {
   };
 
     const handleTitleChange = (e) => {
-    const updatedSlides = [...slides];
-    updatedSlides[currentSlideIndex].title = e.target.value;
-    updateSlides(updatedSlides);
+    // const updatedSlides = [...slides];
+    // updatedSlides[currentSlideIndex].title = e.target.value;
+    // updateSlides(updatedSlides);
+ 
+    dispatch(updateTitle({ index:currentSlideIndex , newTitle: e.target.value }))
   };
 
   const handleDescriptionChange = (e) => {
-    const updatedSlides = [...slides];
-    updatedSlides[currentSlideIndex].description = e.target.value;
-    updateSlides(updatedSlides);
+    // const updatedSlides = [...slides];
+    // updatedSlides[currentSlideIndex].description = e.target.value;
+    // updateSlides(updatedSlides);
+    
+    dispatch(updateDescription({ index:currentSlideIndex, newDescription: e.target.value }))
   };
 
   
@@ -167,6 +174,14 @@ const CarouselPage = () => {
     }
   };
 
+  const openTemplateModal = () => {
+    setTemplateModalShow(true);
+  };
+
+  const closeTemplateModal = () => {
+    setTemplateModalShow(false);
+  };
+
   return (
     <>
       <button
@@ -177,23 +192,24 @@ const CarouselPage = () => {
       >
         Download Image
       </button>
-
+      <button className="btn btn-primary" onClick={openTemplateModal}>Set Template</button>
+        <TemplateModal show={templateModalShow} closeModal = {closeTemplateModal} />
         <div>
         <button onClick={handlePreviousSlide}>Previous</button>
         <button onClick={handleNextSlide}>Next</button>
       </div>
 
-      <CarouselSlides currentSlideIndex={currentSlideIndex}/>
+      <CarouselSlides currentSlide={currentSlideIndex}/>
       <section id="carousel_slide ">
         <div className="flex-col w-[1000px]">
-          {
+          {/* {
             // isTitleChecked && showText && titleText &&
             isTitleChecked && showText && (
               <div>
                 {titleData && <p className="font-sans text-lg">{titleData}</p>}
               </div>
             )
-          }
+          } */}
 
           {/* {isDescriptionChecked && showText && (
             <div>
@@ -204,11 +220,11 @@ const CarouselPage = () => {
           )} */}
 
 <div>
-              {descriptionData && (
+              {/* {descriptionData && (
                 <p className="font-sans text-lg">{descriptionData}</p>
-              )}
+              )} */}
             </div>
-
+{/* 
           {showImage && selectedImage && (
             <div
               className={classNames(
@@ -218,7 +234,7 @@ const CarouselPage = () => {
             >
               <img className={"rounded-2xl"} src={selectedImage} alt="" />
             </div>
-          )}
+          )} */}
         </div>
       </section>
 
