@@ -57,6 +57,13 @@ export const setCurrentSlideIndex= createAction (
         };
     })
 
+export const updateSlides= createAction (
+    'Aidata/updateSlide',
+    (slides) => {
+        return {
+          payload: slides,
+        };
+    })
 
     export const fetchMockData= createAsyncThunk (
         "Aidata/fetchMockData",
@@ -66,7 +73,7 @@ export const setCurrentSlideIndex= createAction (
             title:"Unlocking Success: Crafting an Effective Executive Assistant CV",
             description : "I want you to act as a cretae informing title about career development. I will provide you with the title of an article and your task is to come up with an informative title that conveys the information needed about the subject at hand. My first title is I need help developing an effective CV for an executive assistant position."   
          }
-        // console.log(response)
+         console.log(response)
         return response
         }
         )
@@ -99,7 +106,10 @@ export const AidataSlice = createSlice({
     })
     .addCase(setCurrentSlideIndex, (state, action) => {
         state.currentIndex = action.payload;
-      });
+      })
+    .addCase(updateSlides, (state, action) => {
+        state.slides = action.payload;
+      })
 
 }
 })

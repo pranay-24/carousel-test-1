@@ -1,13 +1,21 @@
-import React, { useState,useContext } from "react";
+import React, { useState,useContext,useEffect } from "react";
 //import CarouselSlide from "./CarouselSlide";
-import {setCurrentSlideIndex, selectSlideByIndex } from "./carousel/AidataSlice";
+//import {setCurrentSlideIndex, selectSlideByIndex } from "./carousel/AidataSlice";
 import {useSelector, useDispatch} from 'react-redux';   
-import { slideContext } from "./carousel/CarouselState";
-const CarouselSlides = () => {
-    const {selectedColor} = useContext(slideContext);
+import { SlideContext } from "./carousel/CarouselState";
+import Sidebar from "./Sidebar";
+
+const CarouselSlides = (props) => {
+    const {selectedColor} = useContext(SlideContext);
+const {currentSlide} = props.currentSlideIndex
+    useEffect(() => {
+        // Perform actions upon selectedColor change
+        // This will run every time selectedColor changes
+        console.log('Selected color changed:', selectedColor);
+    }, [selectedColor]);
 
     const slides = useSelector((state) => state.Aidata.slides);
-    const currentSlideIndex = useSelector((state) => state.Aidata.currentIndex);
+   // const currentSlideIndex = useSelector((state) => state.Aidata.currentIndex);
     const dispatch = useDispatch();
 
     const classNames = (...classes)=>{
@@ -19,16 +27,16 @@ const CarouselSlides = () => {
 //     // Add more slides as needed
 //   ]);
 
-  const [currentSlide, setCurrentSlide] = useState(0);
+  //const [currentSlide, setCurrentSlide] = useState(0);
 
-  const handleNextSlide = () => {
-    dispatch(setCurrentSlideIndex(currentSlideIndex + 1));
-  };
+  // const handleNextSlide = () => {
+  //   dispatch(setCurrentSlideIndex(currentSlideIndex + 1));
+  // };
 
 
-  const handlePreviousSlide = () => {
-    dispatch(setCurrentSlideIndex(currentSlideIndex - 1));
-  };
+  // const handlePreviousSlide = () => {
+  //   dispatch(setCurrentSlideIndex(currentSlideIndex - 1));
+  // };
 
 //   const handleTitleChange = (e) => {
 //     const updatedSlides = [...slides];
@@ -44,21 +52,29 @@ const CarouselSlides = () => {
 
   return (
     <div>
+        
       <section id="carousel_slide">
         <div className="flex-col w-[1000px]">
-          {slides.length > 0 && currentSlideIndex >= 0 && (
+          {slides.length > 0 && currentSlide >= 0 && (
             <div style={{ backgroundColor: selectedColor.background }}>
                 <div  >
-                <p className="font-sans text-lg">{slides[currentSlideIndex].title}</p>
+                <p className="font-sans text-lg">{slides[currentSlide].title}</p>
                 </div>
-              
+                <div>
+        {/* {console.log('selectedColor:', selectedColor)} */}
+        {/* ...rest of your component */}
+        {/* <div style={{background:selectedColor.background , color: selectedColor.fontColor1}}>
+    <span style={{color:selectedColor.fontColor2}}>Hello</span>
+    <span>World</span>
+  </div> */}
+    </div>
               <div >
-              <p className="font-sans text-lg" style={{ color: selectedColor.fontColor1 }}>{slides[currentSlideIndex].description}</p>
+              <p className="font-sans text-lg" style={{ color: selectedColor.fontColor1 }}>{slides[currentSlide].description}</p>
               </div>
               
-              {slides[currentSlideIndex].imageUrl && (
+              {slides[currentSlide].imageUrl && (
                 <div className="flex w-[450px] h-auto overflow-hidden">
-                  <img className={"rounded-2xl w-full "} src={slides[currentSlideIndex].imageUrl} alt="" />
+                  <img className={"rounded-2xl w-full "} src={slides[currentSlide].imageUrl} alt="" />
                 </div>
               )}
             </div>
@@ -66,10 +82,10 @@ const CarouselSlides = () => {
         </div>
       </section>
 
-      <div>
+      {/* <div>
         <button onClick={handlePreviousSlide}>Previous</button>
         <button onClick={handleNextSlide}>Next</button>
-      </div>
+      </div> */}
     </div>
   );
 };

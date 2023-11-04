@@ -1,8 +1,8 @@
 import { createContext, useState,useEffect } from "react";
 
-export const slideContext = createContext();
+export const SlideContext = createContext();
 
-export const CarouselState = (props)=>{
+export const CarouselState = ({children})=>{
  
     const [selectedColor, setSelectedColor] = useState({
         background: '',
@@ -12,14 +12,15 @@ export const CarouselState = (props)=>{
       useEffect(() => {
         //console.log(selectedColor.background);
       }, [selectedColor.background]);
-      const selectBox = (sentbackground, sentfontColor1, sentfontColor2) => {
-        setSelectedColor({ background:sentbackground, fontColor1:sentfontColor1, fontColor2:sentfontColor2 });
+      
+      const selectBox = (background, fontColor1, fontColor2) => {
+        setSelectedColor({ background, fontColor1, fontColor2 });
       // console.log(selectedColor.background);
       };
 
     return (
-        <slideContext.Provider value={{ selectBox, selectedColor }}>
-          {props.children}
-        </slideContext.Provider>
+        <SlideContext.Provider value={{ selectBox, selectedColor }}>
+          {children}
+        </SlideContext.Provider>
       )
 }

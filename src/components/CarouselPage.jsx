@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 
 import { StarIcon } from "@heroicons/react/20/solid";
 import html2canvas from "html2canvas";
@@ -6,13 +6,15 @@ import html2canvas from "html2canvas";
 import { Disclosure } from "@headlessui/react";
 import { ChevronUpIcon } from "@heroicons/react/20/solid";
 import { useSelector, useDispatch } from "react-redux";
-
+import CarouselSlides from "./CarouselSlides";
 import {
   fetchTitleAsync,
   fetchDescriptionAsync,
   fetchMockData,
   selectTitle,
   selectDescription,
+  updateSlides,
+  setCurrentSlideIndex
 } from "./carousel/AidataSlice";
 
 function classNames(...classes) {
@@ -30,9 +32,14 @@ const CarouselPage = () => {
     titleInput: "",
     descriptionInput: "",
   });
+  
   const dispatch = useDispatch();
-  const titleData = useSelector(selectTitle);
-  const descriptionData = useSelector(selectDescription);
+  const currentSlideIndex = useSelector((state) => state.Aidata.currentIndex);
+  const titleData = useSelector((state) => selectTitle(state, currentSlideIndex));
+  const descriptionData = useSelector((state) => selectDescription(state, currentSlideIndex));
+  const slides = useSelector((state) => state.Aidata.slides);
+  
+
 
   const [titleText, setTitleText] = useState("");
   const [selectedColor, setSelectedColor] = useState();
@@ -45,6 +52,7 @@ const CarouselPage = () => {
   const [isDescriptionChecked, setIsDescriptionChecked] = useState(true);
   const [activeOption, setActiveOption] = useState("");
 
+ 
   const takeScreenshot = async (element) => {
     try {
       const canvas = await html2canvas(element);
@@ -75,6 +83,19 @@ const CarouselPage = () => {
     setInputData({ ...inputData, [e.target.name]: e.target.value });
   };
 
+    const handleTitleChange = (e) => {
+    const updatedSlides = [...slides];
+    updatedSlides[currentSlideIndex].title = e.target.value;
+    updateSlides(updatedSlides);
+  };
+
+  const handleDescriptionChange = (e) => {
+    const updatedSlides = [...slides];
+    updatedSlides[currentSlideIndex].description = e.target.value;
+    updateSlides(updatedSlides);
+  };
+
+  
   // const handleSubmit = () => {
   //   const specificInput = {
   //     inputs: inputData.titleInput,
@@ -95,17 +116,29 @@ const CarouselPage = () => {
   //   // console.log(textData);
   // };
 
+  const handleNextSlide = () => {
+    dispatch(setCurrentSlideIndex(currentSlideIndex + 1));
+  };
 
-  const handleSubmit =()=>{
+
+  const handlePreviousSlide = () => {
+    dispatch(setCurrentSlideIndex(currentSlideIndex - 1));
+  };
+
+
+  const handleSubmit = () => {
     dispatch(fetchMockData());
-  }
+    console.log(titleData);
+    console.log(descriptionData);
+  };
 
   const handleDescriptionSubmit = () => {
-    const specificInput = {
-      inputs: inputData.descriptionInput,
-    };
-    console.log(specificInput);
-    dispatch(fetchDescriptionAsync(specificInput));
+    // const specificInput = {
+    //   inputs: inputData.descriptionInput,
+    // };
+   // console.log(specificInput);
+    //dispatch(fetchDescriptionAsync(specificInput));
+    dispatch(fetchMockData());
     //console.log(textData);
   };
 
@@ -116,9 +149,7 @@ const CarouselPage = () => {
 
   const handleDescriptionCheckboxChange = () => {
     setIsDescriptionChecked((prev) => !prev); // Update the state when the checkbox is changed
-   
   };
-
 
   const handleImageTextClick = (option) => {
     setActiveOption(option);
@@ -126,7 +157,7 @@ const CarouselPage = () => {
     if (option === "justText") {
       setShowImage(false);
       setShowText(true);
-     // console.log("just text clicked")
+     //console.log("just text clicked")
     } else if (option === "textWithImage") {
       setShowImage(true);
       setShowText(true);
@@ -146,6 +177,7 @@ const CarouselPage = () => {
       >
         Download Image
       </button>
+      <CarouselSlides />
       <section id="carousel_slide ">
         <div className="flex-col w-[1000px]">
           {
@@ -157,13 +189,19 @@ const CarouselPage = () => {
             )
           }
 
-          {isDescriptionChecked && showText && (
+          {/* {isDescriptionChecked && showText && (
             <div>
               {descriptionData && (
                 <p className="font-sans text-lg">{descriptionData}</p>
               )}
             </div>
-          )}
+          )} */}
+
+<div>
+              {descriptionData && (
+                <p className="font-sans text-lg">{descriptionData}</p>
+              )}
+            </div>
 
           {showImage && selectedImage && (
             <div
@@ -236,21 +274,36 @@ const CarouselPage = () => {
                       onChange={handleTitleCheckboxChange}
                     />
                   </div>
-                  <label htmlFor="titleInput">Enter Title</label>
+                  <label htmlFor="titleInput">Enter Keywords for Title</label>
                   <input
-                  className="border-grey-400 border p-2 focus:ring-1 focus:ring-blue-400"
+                    className="border-grey-400 border p-2 focus:ring-1 focus:ring-blue-400"
                     type="text"
                     name="titleInput"
                     value={inputData.titleInput}
                     onChange={handleChange}
                   />
-                  <button className="btn border bg-purple-200 hover:cursor-pointer" type="submit" onClick={handleSubmit}>
+                  <button
+                    className="btn border bg-purple-200 hover:cursor-pointer"
+                    type="submit"
+                    onClick={handleSubmit}
+                  >
                     Generate Title
                   </button>
                 </div>
+                <div>
+                  <label htmlFor="titleData">Title</label>
+                  <input
+                    className=" border border-grey-400  p-2 focus:ring-1 focus:ring-blue-400"
+                    type="text "
+                    name="titleData"
+                    value={titleData}
+                    onChange={handleTitleChange}
+                  />
+                </div>
+
 
                 <div>
-                <div className="form-check form-switch">
+                  <div className="form-check form-switch">
                     <label
                       className="form-check-label"
                       htmlFor="flexSwitchCheckDefault"
@@ -267,17 +320,34 @@ const CarouselPage = () => {
                     />
                   </div>
 
-                  <label htmlFor="titleInput">Enter Description</label>
+                  <label htmlFor="descriptionInput">
+                    Enter keywords for Description
+                  </label>
                   <input
-                  className=" border border-grey-400  p-2 focus:ring-1 focus:ring-blue-400"
+                    className=" border border-grey-400  p-2 focus:ring-1 focus:ring-blue-400"
                     type="text "
                     name="descriptionInput"
                     value={inputData.descriptionInput}
                     onChange={handleChange}
                   />
-                  <button type="submit" className="btn border bg-purple-200 hover:cursor-pointer" onClick={handleDescriptionSubmit}>
+
+                  <button
+                    type="submit"
+                    className="btn border bg-purple-200 hover:cursor-pointer"
+                    onClick={handleDescriptionSubmit}
+                  >
                     Generate Description
                   </button>
+                </div>
+                <div>
+                  <label htmlFor="descriptionData">Description</label>
+                  <input
+                    className=" border border-grey-400 w-full p-2 focus:ring-1 focus:ring-blue-400"
+                    type="text "
+                    name="descriptionData"
+                    value={descriptionData}
+                    onChange={handleDescriptionChange}
+                  />
                 </div>
               </Disclosure.Panel>
             </>

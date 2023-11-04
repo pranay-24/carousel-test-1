@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState,useContext } from 'react'
 
 import {BrowserRouter,Routes,Route,Link} from 'react-router-dom'
 import CarouselPage from './components/CarouselPage'
@@ -13,6 +13,7 @@ function App() {
     <>
     <CarouselState>
     <p>Go to the /carouselpage page</p>
+      
       <BrowserRouter>
     <Routes>
       <Route path='/carouselpage' element={<CarouselPage/>} />
