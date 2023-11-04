@@ -54,7 +54,7 @@ const CarouselSlides = ({currentSlide}) => {
                   />
                 </div>
               )}
-              {console.log(slides[currentSlide].imageUrl)}
+           
             </div>
           )}
         </div>
