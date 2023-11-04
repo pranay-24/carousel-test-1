@@ -177,7 +177,13 @@ const CarouselPage = () => {
       >
         Download Image
       </button>
-      <CarouselSlides />
+
+        <div>
+        <button onClick={handlePreviousSlide}>Previous</button>
+        <button onClick={handleNextSlide}>Next</button>
+      </div>
+
+      <CarouselSlides currentSlideIndex={currentSlideIndex}/>
       <section id="carousel_slide ">
         <div className="flex-col w-[1000px]">
           {
