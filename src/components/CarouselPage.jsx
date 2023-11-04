@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 import { StarIcon } from "@heroicons/react/20/solid";
 import html2canvas from "html2canvas";
@@ -35,14 +35,16 @@ const CarouselPage = () => {
     titleInput: "",
     descriptionInput: "",
   });
-  
+
   const dispatch = useDispatch();
   const currentSlideIndex = useSelector((state) => state.Aidata.currentIndex);
-  const titleData = useSelector((state) => selectTitle(state, currentSlideIndex));
-  const descriptionData = useSelector((state) => selectDescription(state, currentSlideIndex));
+  const titleData = useSelector((state) =>
+    selectTitle(state, currentSlideIndex)
+  );
+  const descriptionData = useSelector((state) =>
+    selectDescription(state, currentSlideIndex)
+  );
   const slides = useSelector((state) => state.Aidata.slides);
-  
-
 
   const [titleText, setTitleText] = useState("");
   const [selectedColor, setSelectedColor] = useState();
@@ -54,8 +56,8 @@ const CarouselPage = () => {
   const [isTitleChecked, setIsTitleChecked] = useState(true);
   const [isDescriptionChecked, setIsDescriptionChecked] = useState(true);
   const [activeOption, setActiveOption] = useState("");
-  const [templateModalShow,setTemplateModalShow] = useState(false)
- 
+  const [templateModalShow, setTemplateModalShow] = useState(false);
+
   const takeScreenshot = async (element) => {
     try {
       const canvas = await html2canvas(element);
@@ -86,23 +88,29 @@ const CarouselPage = () => {
     setInputData({ ...inputData, [e.target.name]: e.target.value });
   };
 
-    const handleTitleChange = (e) => {
+  const handleTitleChange = (e) => {
     // const updatedSlides = [...slides];
     // updatedSlides[currentSlideIndex].title = e.target.value;
     // updateSlides(updatedSlides);
- 
-    dispatch(updateTitle({ index:currentSlideIndex , newTitle: e.target.value }))
+
+    dispatch(
+      updateTitle({ index: currentSlideIndex, newTitle: e.target.value })
+    );
   };
 
   const handleDescriptionChange = (e) => {
     // const updatedSlides = [...slides];
     // updatedSlides[currentSlideIndex].description = e.target.value;
     // updateSlides(updatedSlides);
-    
-    dispatch(updateDescription({ index:currentSlideIndex, newDescription: e.target.value }))
+
+    dispatch(
+      updateDescription({
+        index: currentSlideIndex,
+        newDescription: e.target.value,
+      })
+    );
   };
 
-  
   // const handleSubmit = () => {
   //   const specificInput = {
   //     inputs: inputData.titleInput,
@@ -124,14 +132,18 @@ const CarouselPage = () => {
   // };
 
   const handleNextSlide = () => {
-    dispatch(setCurrentSlideIndex(currentSlideIndex + 1));
-  };
+    if(currentSlideIndex < (slides.length -1)){
 
+    dispatch(setCurrentSlideIndex(currentSlideIndex + 1));
+    }
+  };
 
   const handlePreviousSlide = () => {
-    dispatch(setCurrentSlideIndex(currentSlideIndex - 1));
+    if(currentSlideIndex > 0){
+      dispatch(setCurrentSlideIndex(currentSlideIndex - 1));
+    }
+   
   };
-
 
   const handleSubmit = () => {
     dispatch(fetchMockData());
@@ -143,7 +155,7 @@ const CarouselPage = () => {
     // const specificInput = {
     //   inputs: inputData.descriptionInput,
     // };
-   // console.log(specificInput);
+    // console.log(specificInput);
     //dispatch(fetchDescriptionAsync(specificInput));
     dispatch(fetchMockData());
     //console.log(textData);
@@ -164,7 +176,7 @@ const CarouselPage = () => {
     if (option === "justText") {
       setShowImage(false);
       setShowText(true);
-     //console.log("just text clicked")
+      //console.log("just text clicked")
     } else if (option === "textWithImage") {
       setShowImage(true);
       setShowText(true);
@@ -190,16 +202,32 @@ const CarouselPage = () => {
           handleImageDownload();
         }}
       >
-        Download Image
+        Download Slide as Image
       </button>
-      <button className="btn btn-primary" onClick={openTemplateModal}>Set Template</button>
-        <TemplateModal show={templateModalShow} closeModal = {closeTemplateModal} />
-        <div>
-        <button onClick={handlePreviousSlide}>Previous</button>
-        <button onClick={handleNextSlide}>Next</button>
+      <div>
+        <button className="btn btn-primary" onClick={openTemplateModal}>
+          Set Template
+        </button>
       </div>
 
-      <CarouselSlides currentSlide={currentSlideIndex}/>
+      <TemplateModal show={templateModalShow} closeModal={closeTemplateModal} />
+
+      <div className="flex justify-center gap-20 items-center text-center mt-4  ">
+        <button
+          className="btn bg-purple-300 hover:bg-purple-400"
+          onClick={handlePreviousSlide}
+        >
+          Previous
+        </button>
+        <button
+          className="btn  bg-purple-300  hover:bg-purple-400"
+          onClick={handleNextSlide}
+        >
+          Next
+        </button>
+      </div>
+
+      <CarouselSlides currentSlide={currentSlideIndex} />
       <section id="carousel_slide ">
         <div className="flex-col w-[1000px]">
           {/* {
@@ -219,12 +247,12 @@ const CarouselPage = () => {
             </div>
           )} */}
 
-<div>
-              {/* {descriptionData && (
+          <div>
+            {/* {descriptionData && (
                 <p className="font-sans text-lg">{descriptionData}</p>
               )} */}
-            </div>
-{/* 
+          </div>
+          {/* 
           {showImage && selectedImage && (
             <div
               className={classNames(
@@ -322,7 +350,6 @@ const CarouselPage = () => {
                     onChange={handleTitleChange}
                   />
                 </div>
-
 
                 <div>
                   <div className="form-check form-switch">

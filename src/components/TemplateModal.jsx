@@ -7,12 +7,12 @@ export default function TemplateModal({show, closeModal}) {
     const { selectedColor } = useContext(SlideContext);
   return (
     
-    <div>
+    <div >
           <div className="flex justify-center">
 
 
 
-<Dialog open={show} onClose={closeModal}>
+<Dialog className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-30 flex items-center justify-center z-50" open={show} onClose={closeModal}>
 <Dialog.Panel className="bg-white shadow-lg rounded-md p-4">
 <Dialog.Title className="bg-purple-300 p-2 mb-4 text-lg text-center">
 <b>Choose Template</b>
@@ -32,7 +32,7 @@ Please choose a template from below options.
 </div>
 
 <div className="flex justify-end mt-4">
-<button className="px-4 py-2 bg-purple-300 rounded-md text-white" onClick={closeModal}>Cancel</button>
+<button className="px-4 py-2 bg-purple-300 rounded-md text-white" onClick={closeModal}>Ok</button>
 </div>
 </Dialog.Panel>
 </Dialog>

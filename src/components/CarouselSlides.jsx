@@ -21,46 +21,21 @@ const CarouselSlides = ({currentSlide}) => {
   const classNames = (...classes) => {
     classes.filter(Boolean).join("");
   };
-  //   const [slides, setSlides] = useState([
-  //     { title: "Title 1", description: "Description 1", imageUrl: "url1" },
-  //     { title: "Title 2", description: "Description 2", imageUrl: "url2" },
-  //     // Add more slides as needed
-  //   ]);
-
-  //const [currentSlide, setCurrentSlide] = useState(0);
-
-  // const handleNextSlide = () => {
-  //   dispatch(setCurrentSlideIndex(currentSlideIndex + 1));
-  // };
-
-  // const handlePreviousSlide = () => {
-  //   dispatch(setCurrentSlideIndex(currentSlideIndex - 1));
-  // };
-
-  //   const handleTitleChange = (e) => {
-  //     const updatedSlides = [...slides];
-  //     updatedSlides[currentSlide].title = e.target.value;
-  //     setSlides(updatedSlides);
-  //   };
-
-  //   const handleDescriptionChange = (e) => {
-  //     const updatedSlides = [...slides];
-  //     updatedSlides[currentSlide].description = e.target.value;
-  //     setSlides(updatedSlides);
-  //   };
-
+  
   return (
     <div>
       <section id="carousel_slide">
         <div className="flex-col w-[1000px]">
           {slides.length > 0 && currentSlide >= 0 && currentSlide !== undefined && (
-            <div style={{ backgroundColor: selectedColor.background }}>
+            <div style={{ backgroundColor: selectedColor.background , }}>
               <div>
-                <p className="font-sans text-lg">
+                <p className="font-sans text-lg"
+                style={{color:selectedColor.fontColor2}}
+                >
                   {slides[currentSlide].title}
                 </p>
               </div>
-              <div></div>
+             
               <div>
                 <p
                   className="font-sans text-lg"
