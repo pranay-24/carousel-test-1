@@ -5,9 +5,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { SlideContext } from "./carousel/CarouselState";
 import Sidebar from "./Sidebar";
 
-const CarouselSlides = ({currentSlide}) => {
+const CarouselSlides = ({currentSlide, showImage, showText}) => {
   const { selectedColor } = useContext(SlideContext);
  // const { currentSlide } = props.currentSlide;
+ //console.log(showImage, showText);
   useEffect(() => {
     // Perform actions upon selectedColor change
     // This will run every time selectedColor changes
@@ -28,6 +29,7 @@ const CarouselSlides = ({currentSlide}) => {
         <div className="flex-col w-[1000px]">
           {slides.length > 0 && currentSlide >= 0 && currentSlide !== undefined && (
             <div style={{ backgroundColor: selectedColor.background , }}>
+             {showText && ( <div>
               <div>
                 <p className="font-sans text-lg"
                 style={{color:selectedColor.fontColor2}}
@@ -44,8 +46,10 @@ const CarouselSlides = ({currentSlide}) => {
                   {slides[currentSlide].description}
                 </p>
               </div>
+              </div> )}
+              
 
-              {slides[currentSlide].imageUrl && (
+              {showImage && slides[currentSlide].imageUrl && (
                 <div className="flex w-[450px] h-auto overflow-hidden">
                   <img
                     className={"rounded-2xl w-full "}

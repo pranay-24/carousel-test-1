@@ -25,11 +25,7 @@ function classNames(...classes) {
 }
 
 const CarouselPage = () => {
-  const colors = [
-    { name: "white", class: "bg-white" },
-    { name: "grey", class: "bg-gray-200" },
-    { name: "black", class: "bg-black" },
-  ];
+
 
   const [inputData, setInputData] = useState({
     titleInput: "",
@@ -51,8 +47,10 @@ const CarouselPage = () => {
   const [imageUrl, setImageUrl] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
   const [imagePlacementClass, setImagePlacementClass] = useState("");
+
   const [showImage, setShowImage] = useState(false);
   const [showText, setShowText] = useState(true);
+
   const [isTitleChecked, setIsTitleChecked] = useState(true);
   const [isDescriptionChecked, setIsDescriptionChecked] = useState(true);
   const [activeOption, setActiveOption] = useState("");
@@ -176,7 +174,7 @@ const CarouselPage = () => {
     if (option === "justText") {
       setShowImage(false);
       setShowText(true);
-      //console.log("just text clicked")
+     // console.log("just text clicked")
     } else if (option === "textWithImage") {
       setShowImage(true);
       setShowText(true);
@@ -227,7 +225,7 @@ const CarouselPage = () => {
         </button>
       </div>
 
-      <CarouselSlides currentSlide={currentSlideIndex} />
+      <CarouselSlides currentSlide={currentSlideIndex} showImage={showImage} showText={showText}/>
       <section id="carousel_slide ">
         <div className="flex-col w-[1000px]">
           {/* {
