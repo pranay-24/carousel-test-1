@@ -32,6 +32,12 @@ const CarouselPage = () => {
     descriptionInput: "",
   });
 
+  const [outputData, setOutputData] = useState({
+    titleOutput: '',
+    descriptionOutput: '',
+  })
+
+
   const dispatch = useDispatch();
   const currentSlideIndex = useSelector((state) => state.Aidata.currentIndex);
   const titleData = useSelector((state) =>
@@ -40,6 +46,15 @@ const CarouselPage = () => {
   const descriptionData = useSelector((state) =>
     selectDescription(state, currentSlideIndex)
   );
+
+  useEffect(() => {
+    setOutputData({
+      titleOutput: titleData || '',
+      descriptionOutput: descriptionData || '',
+    });
+
+    
+  }, [titleData, descriptionData]);
   const slides = useSelector((state) => state.Aidata.slides);
 
   const [titleText, setTitleText] = useState("");
@@ -56,6 +71,7 @@ const CarouselPage = () => {
   const [activeOption, setActiveOption] = useState("");
   const [templateModalShow, setTemplateModalShow] = useState(false);
 
+ 
   const takeScreenshot = async (element) => {
     try {
       const canvas = await html2canvas(element);
@@ -109,6 +125,19 @@ const CarouselPage = () => {
     );
   };
 
+  const handleDescriptionOutputChange = (event)=>{
+    setOutputData({...outputData, descriptionOutput: event.target.value} )
+  }
+
+  const handleTitleOutputChange = (event)=>{
+    setOutputData({...outputData, titleOutput: event.target.value} )
+  }
+  const handleTitleClear = () => {
+    setOutputData({ ...outputData, titleOutput: '' });
+  };
+  const handleDescriptionClear = () => {
+    setOutputData({ ...outputData, descriptionOutput: '' });
+  };
   // const handleSubmit = () => {
   //   const specificInput = {
   //     inputs: inputData.titleInput,
@@ -312,7 +341,7 @@ const CarouselPage = () => {
                       className="form-check-label"
                       htmlFor="flexSwitchCheckDefault"
                     >
-                      Enable Title
+                      Title
                     </label>
                     <input
                       className="form-check-input "
@@ -340,14 +369,15 @@ const CarouselPage = () => {
                   </button>
                 </div>
                 <div>
-                  <label htmlFor="titleData">Title</label>
-                  <input
-                    className=" border border-grey-400  p-2 focus:ring-1 focus:ring-blue-400"
+                  {/* <label htmlFor="titleData">Title</label> */}
+                  <textarea
+                    className=" border border-grey-400 w-full p-2 focus:ring-1 focus:ring-blue-400"
                     type="text "
                     name="titleData"
-                    value={titleData}
-                    onChange={handleTitleChange}
+                    value={outputData.titleOutput}
+                    onChange={handleTitleOutputChange}
                   />
+                   <button onClick={handleTitleClear}>Clear Text</button>
                 </div>
 
                 <div>
@@ -356,7 +386,7 @@ const CarouselPage = () => {
                       className="form-check-label"
                       htmlFor="flexSwitchCheckDefault"
                     >
-                      Enable Description
+                      Description
                     </label>
                     <input
                       className="form-check-input "
@@ -388,14 +418,15 @@ const CarouselPage = () => {
                   </button>
                 </div>
                 <div>
-                  <label htmlFor="descriptionData">Description</label>
-                  <input
-                    className=" border border-grey-400 w-full p-2 focus:ring-1 focus:ring-blue-400"
+                  {/* <label htmlFor="descriptionData">Description</label> */}
+                  <textarea
+                    className=" border border-grey-400 w-full h-[100px] p-2  focus:ring-1 focus:ring-blue-400"
                     type="text "
                     name="descriptionData"
-                    value={descriptionData}
-                    onChange={handleDescriptionChange}
+                    value={outputData.descriptionOutput}
+                    onChange={handleDescriptionOutputChange}
                   />
+                  <button onClick={handleDescriptionClear}>Clear Text</button>
                 </div>
               </Disclosure.Panel>
             </>
