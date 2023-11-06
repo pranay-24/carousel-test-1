@@ -1,5 +1,5 @@
 //import 'dotenv/config'
-
+//  removed
 export function queryData (inputData)
 { return new Promise( async (resolve,reject)=>{
 const requestOption = {
