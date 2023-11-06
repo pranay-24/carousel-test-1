@@ -25,18 +25,15 @@ function classNames(...classes) {
 }
 
 const CarouselPage = () => {
-
-
   const [inputData, setInputData] = useState({
     titleInput: "",
     descriptionInput: "",
   });
 
   const [outputData, setOutputData] = useState({
-    titleOutput: '',
-    descriptionOutput: '',
-  })
-
+    titleOutput: "",
+    descriptionOutput: "",
+  });
 
   const dispatch = useDispatch();
   const currentSlideIndex = useSelector((state) => state.Aidata.currentIndex);
@@ -49,11 +46,9 @@ const CarouselPage = () => {
 
   useEffect(() => {
     setOutputData({
-      titleOutput: titleData || '',
-      descriptionOutput: descriptionData || '',
+      titleOutput: titleData || "",
+      descriptionOutput: descriptionData || "",
     });
-
-    
   }, [titleData, descriptionData]);
   const slides = useSelector((state) => state.Aidata.slides);
 
@@ -71,7 +66,6 @@ const CarouselPage = () => {
   const [activeOption, setActiveOption] = useState("");
   const [templateModalShow, setTemplateModalShow] = useState(false);
 
- 
   const takeScreenshot = async (element) => {
     try {
       const canvas = await html2canvas(element);
@@ -102,13 +96,17 @@ const CarouselPage = () => {
     setInputData({ ...inputData, [e.target.name]: e.target.value });
   };
 
-  const handleTitleChange = (e) => {
-    // const updatedSlides = [...slides];
-    // updatedSlides[currentSlideIndex].title = e.target.value;
-    // updateSlides(updatedSlides);
-
+  const handleTitleChange = () => {
+    //    const updatedSlides = [...slides];
+    //    updatedSlides[currentSlideIndex].title = outputData.titleOutput;
+    //  dispatch( updateSlides(updatedSlides) );
+    //console.log(outputData.titleOutput)
+    // console.log(slides);
     dispatch(
-      updateTitle({ index: currentSlideIndex, newTitle: e.target.value })
+      updateTitle({
+        index: currentSlideIndex,
+        newTitle: outputData.titleOutput,
+      })
     );
   };
 
@@ -120,23 +118,24 @@ const CarouselPage = () => {
     dispatch(
       updateDescription({
         index: currentSlideIndex,
-        newDescription: e.target.value,
+        newDescription: outputData.descriptionOutput,
       })
     );
   };
 
-  const handleDescriptionOutputChange = (event)=>{
-    setOutputData({...outputData, descriptionOutput: event.target.value} )
-  }
+  const handleDescriptionOutputChange = (event) => {
+    setOutputData({ ...outputData, descriptionOutput: event.target.value });
+  };
 
-  const handleTitleOutputChange = (event)=>{
-    setOutputData({...outputData, titleOutput: event.target.value} )
-  }
+  const handleTitleOutputChange = (event) => {
+    setOutputData({ ...outputData, titleOutput: event.target.value });
+  };
+
   const handleTitleClear = () => {
-    setOutputData({ ...outputData, titleOutput: '' });
+    setOutputData({ ...outputData, titleOutput: "" });
   };
   const handleDescriptionClear = () => {
-    setOutputData({ ...outputData, descriptionOutput: '' });
+    setOutputData({ ...outputData, descriptionOutput: "" });
   };
   // const handleSubmit = () => {
   //   const specificInput = {
@@ -159,23 +158,22 @@ const CarouselPage = () => {
   // };
 
   const handleNextSlide = () => {
-    if(currentSlideIndex < (slides.length -1)){
-
-    dispatch(setCurrentSlideIndex(currentSlideIndex + 1));
+    if (currentSlideIndex < slides.length - 1) {
+      dispatch(setCurrentSlideIndex(currentSlideIndex + 1));
     }
   };
 
   const handlePreviousSlide = () => {
-    if(currentSlideIndex > 0){
+    if (currentSlideIndex > 0) {
       dispatch(setCurrentSlideIndex(currentSlideIndex - 1));
     }
-   
   };
 
   const handleSubmit = () => {
-    dispatch(fetchMockData());
-    console.log(titleData);
-    console.log(descriptionData);
+    //dispatch(fetchMockData());
+    //console.log(titleData);
+    // console.log(descriptionData);
+    dispatch(fetchTitleAsync(inputData.titleInput, currentSlideIndex));
   };
 
   const handleDescriptionSubmit = () => {
@@ -203,7 +201,7 @@ const CarouselPage = () => {
     if (option === "justText") {
       setShowImage(false);
       setShowText(true);
-     // console.log("just text clicked")
+      // console.log("just text clicked")
     } else if (option === "textWithImage") {
       setShowImage(true);
       setShowText(true);
@@ -254,7 +252,11 @@ const CarouselPage = () => {
         </button>
       </div>
 
-      <CarouselSlides currentSlide={currentSlideIndex} showImage={showImage} showText={showText}/>
+      <CarouselSlides
+        currentSlide={currentSlideIndex}
+        showImage={showImage}
+        showText={showText}
+      />
       <section id="carousel_slide ">
         <div className="flex-col w-[1000px]">
           {/* {
@@ -377,7 +379,20 @@ const CarouselPage = () => {
                     value={outputData.titleOutput}
                     onChange={handleTitleOutputChange}
                   />
-                   <button onClick={handleTitleClear}>Clear Text</button>
+                  <div className="w-full flex gap-5 mb-4 mt-3">
+                    <button
+                      className="btn border bg-purple-200 hover:cursor-pointer"
+                      onClick={handleTitleClear}
+                    >
+                      Clear Text
+                    </button>
+                    <button
+                      className="btn border bg-purple-200 hover:cursor-pointer"
+                      onClick={handleTitleChange}
+                    >
+                      Save Text
+                    </button>
+                  </div>
                 </div>
 
                 <div>
@@ -426,7 +441,20 @@ const CarouselPage = () => {
                     value={outputData.descriptionOutput}
                     onChange={handleDescriptionOutputChange}
                   />
-                  <button onClick={handleDescriptionClear}>Clear Text</button>
+                  <div className="w-full flex gap-5 mb-4 mt-3">
+                    <button
+                      className="btn border bg-purple-200 hover:cursor-pointer"
+                      onClick={handleDescriptionClear}
+                    >
+                      Clear Text
+                    </button>
+                    <button
+                      className="btn border bg-purple-200 hover:cursor-pointer"
+                      onClick={handleDescriptionChange}
+                    >
+                      Save Text
+                    </button>
+                  </div>
                 </div>
               </Disclosure.Panel>
             </>

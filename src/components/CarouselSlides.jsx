@@ -12,7 +12,7 @@ const CarouselSlides = ({currentSlide, showImage, showText}) => {
   useEffect(() => {
     // Perform actions upon selectedColor change
     // This will run every time selectedColor changes
-    console.log("Selected color changed:", selectedColor);
+    //console.log("Selected color changed:", selectedColor);
   }, [selectedColor]);
 
   const slides = useSelector((state) => state.Aidata.slides);
@@ -28,10 +28,10 @@ const CarouselSlides = ({currentSlide, showImage, showText}) => {
       <section id="carousel_slide">
         <div className="flex-col w-[1000px]">
           {slides.length > 0 && currentSlide >= 0 && currentSlide !== undefined && (
-            <div style={{ backgroundColor: selectedColor.background , }}>
+            <div className="flex justify-center items-center p-3" style={{ backgroundColor: selectedColor.background , }}>
              {showText && ( <div>
               <div>
-                <p className="font-sans text-lg"
+                <p className="font-sans text-xl w-[500px] text-center"
                 style={{color:selectedColor.fontColor2}}
                 >
                   {slides[currentSlide].title}
@@ -40,7 +40,7 @@ const CarouselSlides = ({currentSlide, showImage, showText}) => {
              
               <div>
                 <p
-                  className="font-sans text-lg"
+                  className="font-sans text-lg w-[500px]"
                   style={{ color: selectedColor.fontColor1 }}
                 >
                   {slides[currentSlide].description}

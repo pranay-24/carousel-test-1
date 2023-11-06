@@ -28,8 +28,10 @@ const requestOption = {
     method:"POST",
     headers: {
         "Content-type": "application/json",
-        "Authorization": "Bearer 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"
+        "Authorization": "Bearer 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",
+        "max_length" : 512,
     },
+
     body: JSON.stringify(inputData)
 }
 const response = await fetch("https://api-inference.huggingface.co/models/MBZUAI/LaMini-Flan-T5-783M",requestOption)
