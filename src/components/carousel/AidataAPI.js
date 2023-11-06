@@ -1,4 +1,4 @@
-require('dotenv').config()
+import 'dotenv/config'
 
 export function queryData (inputData)
 { return new Promise( async (resolve,reject)=>{
