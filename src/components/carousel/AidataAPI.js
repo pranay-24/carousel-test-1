@@ -1,4 +1,4 @@
-import 'dotenv/config'
+//import 'dotenv/config'
 
 export function queryData (inputData)
 { return new Promise( async (resolve,reject)=>{
@@ -6,7 +6,7 @@ const requestOption = {
     method:"POST",
     headers: {
         "Content-type": "application/json",
-        "Authorization": process.env.GPT_TOKEN
+        "Authorization": "Bearer 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"
     },
     body: JSON.stringify(inputData)
 }
@@ -30,7 +30,7 @@ const requestOption = {
     method:"POST",
     headers: {
         "Content-type": "application/json",
-        "Authorization": process.env.LAMINI_TOKEN,
+        "Authorization": "Bearer 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",
         "max_length" : 512,
     },
 
