@@ -97,11 +97,7 @@ const CarouselPage = () => {
   };
 
   const handleTitleChange = () => {
-    //    const updatedSlides = [...slides];
-    //    updatedSlides[currentSlideIndex].title = outputData.titleOutput;
-    //  dispatch( updateSlides(updatedSlides) );
-    //console.log(outputData.titleOutput)
-    // console.log(slides);
+
     dispatch(
       updateTitle({
         index: currentSlideIndex,
@@ -111,9 +107,7 @@ const CarouselPage = () => {
   };
 
   const handleDescriptionChange = (e) => {
-    // const updatedSlides = [...slides];
-    // updatedSlides[currentSlideIndex].description = e.target.value;
-    // updateSlides(updatedSlides);
+  
 
     dispatch(
       updateDescription({
@@ -152,14 +146,15 @@ const CarouselPage = () => {
   };
 
   const handleSubmit = () => {
-   
-    dispatch(fetchTitleAsync({inputTitle : inputData.titleInput,
+    const prompt = " Generate a title for a presentation slide based on the following keywords: " + inputData.titleInput; 
+    dispatch(fetchTitleAsync({inputTitle : prompt,
       index: currentSlideIndex }));
   };
 
   const handleDescriptionSubmit = () => {
-    
-    dispatch(fetchTitleAsync({inputDescription : inputData.descriptionInput,
+    console.log(inputData.descriptionInput)
+    const prompt = " Generate descriptive content of minimum 100 words for a presentation slide based on the following keywords: " + inputData.descriptionInput;
+    dispatch(fetchDescriptionAsync({inputDescription : prompt,
       index: currentSlideIndex }));
     //console.log(textData);
   };

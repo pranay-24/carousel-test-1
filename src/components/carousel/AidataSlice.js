@@ -35,7 +35,7 @@ export const fetchTitleAsync= createAsyncThunk (
     "Aidata/fetchTitle",
      async ({inputTitle,index})=>{
        // console.log(inputTitle)
-     const response = await queryData1(inputTitle, index)   
+     const response = await queryData1(inputTitle)   
    //  console.log(response)
     const text = response[0].generated_text
     //console.log(text)
@@ -49,7 +49,7 @@ export const fetchTitleAsync= createAsyncThunk (
 export const fetchDescriptionAsync= createAsyncThunk (
     "Aidata/fetchDescription",
      async ({inputDescription, index})=>{
-     const response = await queryData1(inputDescription , index)   
+     const response = await queryData1(inputDescription )   
     // console.log(response)
     const text  = response[0].generated_text
     return {

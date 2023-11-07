@@ -26,6 +26,8 @@ if (response.ok){
 
 export function queryData1 (inputData)
 { return new Promise( async (resolve,reject)=>{
+
+//const prompt = " Generate a title for a presentation slide based on the following keywords: " + inputData;   
 const requestOption = {
     method:"POST",
     headers: {
