@@ -48,10 +48,15 @@ export const fetchTitleAsync= createAsyncThunk (
 
 export const fetchDescriptionAsync= createAsyncThunk (
     "Aidata/fetchDescription",
-     async (textInput)=>{
-     const response = await queryData1(textInput)   
+     async ({inputDescription, index})=>{
+     const response = await queryData1(inputDescription , index)   
     // console.log(response)
-    return response[0].generated_text
+    const text  = response[0].generated_text
+    return {
+        text : text ,
+        index: index
+    }
+
     }
     )
 
@@ -118,22 +123,18 @@ export const AidataSlice = createSlice({
         })
         .addCase (fetchTitleAsync.fulfilled, (state,action)=>{
             const {text, index } = action.payload
-           // console.log(action.payload.text)
-          //console.log(index)
+           
             state.status = "idle"
-            //console.log(text);
-           // console.log(index);
-
-           // updateTitle(index,text)
-           // state.slides[index].title = text
-           state.slides[index].title = text;
+            state.slides[index].title = text;
         })
-        .addCase(fetchDescriptionAsync.pending, (state)=>{
+        .addCase(fetchDescriptionAsync.pending, (state, action)=>{
+            
             state.status = "pending"
         })
         .addCase (fetchDescriptionAsync.fulfilled, (state,action)=>{
+            const {text, index } = action.payload;
             state.status = "idle"
-            state.description = action.payload
+            state.slides[index].description = text;
         })
          .addCase (fetchMockData.fulfilled, (state,action)=>{
                 state.status = "idle"

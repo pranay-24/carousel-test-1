@@ -137,25 +137,7 @@ const CarouselPage = () => {
   const handleDescriptionClear = () => {
     setOutputData({ ...outputData, descriptionOutput: "" });
   };
-  // const handleSubmit = () => {
-  //   const specificInput = {
-  //     inputs: inputData.titleInput,
-  //   };
-  //   console.log(specificInput);
-  //   dispatch(fetchTitleAsync(specificInput));
-  //   // console.log(textData);
-  // };
-
-  // const handleSubmit = () => {
-  //   // const specificInput = {
-  //   //   inputs: inputData.titleInput,
-  //   // };
-  //   //console.log(specificInput);
-  //   //dispatch(fetchTitleAsync(specificInput));
-  //   dispatch(fetchTitleAsync(inputData.titleInput));
-
-  //   // console.log(textData);
-  // };
+  
 
   const handleNextSlide = () => {
     if (currentSlideIndex < slides.length - 1) {
@@ -170,20 +152,15 @@ const CarouselPage = () => {
   };
 
   const handleSubmit = () => {
-    //dispatch(fetchMockData());
-    //console.log(titleData);
-    // console.log(descriptionData);
+   
     dispatch(fetchTitleAsync({inputTitle : inputData.titleInput,
       index: currentSlideIndex }));
   };
 
   const handleDescriptionSubmit = () => {
-    // const specificInput = {
-    //   inputs: inputData.descriptionInput,
-    // };
-    // console.log(specificInput);
-    //dispatch(fetchDescriptionAsync(specificInput));
-    dispatch(fetchMockData());
+    
+    dispatch(fetchTitleAsync({inputDescription : inputData.descriptionInput,
+      index: currentSlideIndex }));
     //console.log(textData);
   };
 
