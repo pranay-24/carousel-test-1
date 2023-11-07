@@ -33,10 +33,12 @@ slides:[
 
 export const fetchTitleAsync= createAsyncThunk (
     "Aidata/fetchTitle",
-     async (textInput,index)=>{
-     const response = await queryData1(textInput)   
-     //console.log(response)
+     async ({inputTitle,index})=>{
+       // console.log(inputTitle)
+     const response = await queryData1(inputTitle, index)   
+   //  console.log(response)
     const text = response[0].generated_text
+    //console.log(text)
     return {
         text: text,
         index: index,
@@ -48,7 +50,7 @@ export const fetchDescriptionAsync= createAsyncThunk (
     "Aidata/fetchDescription",
      async (textInput)=>{
      const response = await queryData1(textInput)   
-     console.log(response)
+    // console.log(response)
     return response[0].generated_text
     }
     )
@@ -116,11 +118,15 @@ export const AidataSlice = createSlice({
         })
         .addCase (fetchTitleAsync.fulfilled, (state,action)=>{
             const {text, index } = action.payload
+           // console.log(action.payload.text)
+          //console.log(index)
             state.status = "idle"
-            console.log(text);
-            console.log(index);
+            //console.log(text);
+           // console.log(index);
+
+           // updateTitle(index,text)
            // state.slides[index].title = text
-            
+           state.slides[index].title = text;
         })
         .addCase(fetchDescriptionAsync.pending, (state)=>{
             state.status = "pending"
@@ -148,7 +154,7 @@ export const AidataSlice = createSlice({
       })
       .addCase(updateTitle, (state, action) => {
        const { index, newTitle } = action.payload;
-      
+     // console.log(newTitle)
         state.slides[index].title = newTitle;
       })
       .addCase(updateDescription, (state, action) => {

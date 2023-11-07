@@ -9,11 +9,11 @@ const CarouselSlides = ({currentSlide, showImage, showText}) => {
   const { selectedColor } = useContext(SlideContext);
  // const { currentSlide } = props.currentSlide;
  //console.log(showImage, showText);
-  useEffect(() => {
-    // Perform actions upon selectedColor change
-    // This will run every time selectedColor changes
-    //console.log("Selected color changed:", selectedColor);
-  }, [selectedColor]);
+  // useEffect(() => {
+  //   // Perform actions upon selectedColor change
+  //   // This will run every time selectedColor changes
+  //   //console.log("Selected color changed:", selectedColor);
+  // }, [selectedColor]);
 
   const slides = useSelector((state) => state.Aidata.slides);
   // const currentSlideIndex = useSelector((state) => state.Aidata.currentIndex);

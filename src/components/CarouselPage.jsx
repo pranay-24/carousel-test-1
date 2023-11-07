@@ -173,7 +173,8 @@ const CarouselPage = () => {
     //dispatch(fetchMockData());
     //console.log(titleData);
     // console.log(descriptionData);
-    dispatch(fetchTitleAsync(inputData.titleInput, currentSlideIndex));
+    dispatch(fetchTitleAsync({inputTitle : inputData.titleInput,
+      index: currentSlideIndex }));
   };
 
   const handleDescriptionSubmit = () => {

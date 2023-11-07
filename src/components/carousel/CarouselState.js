@@ -9,9 +9,9 @@ export const CarouselState = ({children})=>{
         fontColor1: '',
         fontColor2: '',
       });
-      useEffect(() => {
-        //console.log(selectedColor.background);
-      }, [selectedColor.background]);
+      // useEffect(() => {
+      //   //console.log(selectedColor.background);
+      // }, [selectedColor.background]);
       
       const selectBox = (background, fontColor1, fontColor2) => {
         setSelectedColor({ background, fontColor1, fontColor2 });
