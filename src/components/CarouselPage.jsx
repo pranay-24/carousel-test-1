@@ -17,6 +17,7 @@ import {
   setCurrentSlideIndex,
   updateTitle,
   updateDescription,
+  fetchSlidesAsync,
 } from "./carousel/AidataSlice";
 import TemplateModal from "./TemplateModal";
 
@@ -57,7 +58,7 @@ const CarouselPage = () => {
   const [imageUrl, setImageUrl] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
   const [imagePlacementClass, setImagePlacementClass] = useState("");
-
+  const [statement, setStatement] = useState('')
   const [showImage, setShowImage] = useState(false);
   const [showText, setShowText] = useState(true);
 
@@ -94,6 +95,15 @@ const CarouselPage = () => {
 
   const handleChange = (e) => {
     setInputData({ ...inputData, [e.target.name]: e.target.value });
+  };
+
+  const handleStatementChange = (e) => {
+    setStatement(e.target.value);
+  };
+
+  const handleStatementSubmit = () => {
+  // console.log("statement is ",statement)
+    dispatch(fetchSlidesAsync(statement));
   };
 
   const handleTitleChange = () => {
@@ -202,6 +212,23 @@ const CarouselPage = () => {
       >
         Download Slide as Image
       </button>
+      <div>
+      <input
+                    className="border-grey-400 border p-2 focus:ring-1 focus:ring-blue-400"
+                    type="text"
+                    name="titleInput"
+                    value={statement}
+                    onChange={handleStatementChange}
+                  />
+                  <button
+                    className="btn border bg-purple-200 hover:cursor-pointer"
+                    type="submit"
+                    onClick={handleStatementSubmit}
+                  >
+                    Generate Slides
+                  </button>
+
+      </div>
       <div>
         <button className="btn btn-primary" onClick={openTemplateModal}>
           Set Template

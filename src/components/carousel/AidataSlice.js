@@ -43,10 +43,11 @@ slides:[
 export const fetchSlidesAsync = createAsyncThunk (
   "Aidata/fetchSlides",
   async(inputStatement)=>{
+   // console.log(inputStatement)
     const response= await queryData2(inputStatement)
-
+console.log(response)
    const text =  response.choices[0].message.content
-
+console.log(text)
    let slides = text.split('Slide ');
 
 let slideData = [];

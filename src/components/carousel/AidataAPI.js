@@ -55,7 +55,7 @@ if (response.ok){
 
 
 export function queryData2 (inputStatement)
-{ 
+{// console.log(inputStatement)
   return new Promise( async (resolve,reject)=>{
     const requestData = {
       messages: [
@@ -80,7 +80,7 @@ export function queryData2 (inputStatement)
 
       if (response.ok){
         const data = await response.json();
-        //console.log(data)
+        console.log("response is ok",data)
         resolve(data)
     }else {
         reject ("Request failed");
