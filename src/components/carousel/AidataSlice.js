@@ -1,5 +1,5 @@
 import  {createAsyncThunk, createSlice, createAction} from '@reduxjs/toolkit'
-import { queryData,queryData1 } from './AidataAPI'
+import { queryData,queryData1 , queryData2} from './AidataAPI'
 
 
 const initialState ={
@@ -11,22 +11,22 @@ slides:[
     {   id:0,
         title: 'Title 1',
         description: ' Navigating the intricate pathways of career choices, skill development, and professional growth is vital in todays dynamic work landscape. This comprehensive guide delves into strategies, assessments, and resources to help you chart a fulfilling career path aligned with your aspirations and talents.',
-        imageUrl: 'image1.jpg'
+        imageUrl: ''
       },
       { id:1,
         title: 'Title 2',
         description: 'Embark on a thrilling journey through the world of sports and adventure. From adrenaline-pumping exploits to captivating narratives of triumph and resilience, this collection explores the diverse landscapes, challenges, and triumphs in the realm of athletic endeavors, pushing the boundaries of human potential and the spirit of adventure.',
-        imageUrl: 'image2.jpg'
+        imageUrl: ''
       },
       { id:2,
         title: 'Title 3',
         description: 'Embark on a thrilling journey through the world of sports and adventure. From adrenaline-pumping exploits to captivating narratives of triumph and resilience, this collection explores the diverse landscapes, challenges, and triumphs in the realm of athletic endeavors, pushing the boundaries of human potential and the spirit of adventure.',
-        imageUrl: 'image2.jpg'
+        imageUrl: ''
       },
       { id:3,
         title: 'Title 4',
         description: 'Embark on a thrilling journey through the world of sports and adventure. From adrenaline-pumping exploits to captivating narratives of triumph and resilience, this collection explores the diverse landscapes, challenges, and triumphs in the realm of athletic endeavors, pushing the boundaries of human potential and the spirit of adventure.',
-        imageUrl: 'image2.jpg'
+        imageUrl: ''
       }
 ]
 }
@@ -40,6 +40,27 @@ slides:[
 // }
 // )
 
+export const fetchSlidesAsync = createAsyncThunk (
+  "Aidata/fetchSlides",
+  async(inputStatement)=>{
+    const response= await queryData2(inputStatement)
+
+   const text =  response.choices[0].message.content
+
+   let slides = text.split('Slide ');
+
+let slideData = [];
+
+for(let i = 1; i < slides.length; i++) {
+   let slide = slides[i].split('\n\n');
+   let title = slide[0].trim();
+   let content = slide[1].trim();
+   slideData.push({title: title, content: content});
+}
+
+return slideData;
+  }
+)
 
 export const fetchTitleAsync= createAsyncThunk (
     "Aidata/fetchTitle",
@@ -145,6 +166,13 @@ export const AidataSlice = createSlice({
             const {text, index } = action.payload;
             state.status = "idle"
             state.slides[index].description = text;
+        })
+        .addCase(fetchSlidesAsync.fulfilled, (state,action)=>{
+          const slideData = action.payload;
+          for(let i = 0; i < slideData.length; i++){
+            state.slides[i].title = slideData[i].title;
+            state.slides[i].description = slideData[i].description
+          }
         })
          .addCase (fetchMockData.fulfilled, (state,action)=>{
                 state.status = "idle"
