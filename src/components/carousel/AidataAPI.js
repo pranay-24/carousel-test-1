@@ -70,7 +70,7 @@ export function queryData2 (inputStatement)
       ]
      
     };
-console.log('sending request ...  ')
+//console.log('sending request ...  ')
 
 try{
   const response =  await fetch('https://api.llama-api.com/chat/completions', {
@@ -84,7 +84,7 @@ try{
 
   if (response.ok){
     const data = await response.json();
-    console.log("response is ok",data)
+  //  console.log("response is ok",data)
     resolve(data)
 }else {
     reject ("Request failed");

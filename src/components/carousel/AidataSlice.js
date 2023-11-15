@@ -45,9 +45,9 @@ export const fetchSlidesAsync = createAsyncThunk (
   async(inputStatement)=>{
    // console.log(inputStatement)
     const response= await queryData2(inputStatement)
-console.log(response)
+//console.log(response)
    const text =  response.choices[0].message.content
-console.log(text)
+//console.log(text)
    let slides = text.split('Slide ');
 
 let slideData = [];
@@ -57,8 +57,9 @@ for(let i = 1; i < slides.length; i++) {
    let title = slide[0].trim();
    let content = slide[1].trim();
    slideData.push({title: title, content: content});
-}
 
+}
+console.log(slideData);
 return slideData;
   }
 )
