@@ -17,6 +17,16 @@ slides:[
         title: 'Title 2',
         description: 'Embark on a thrilling journey through the world of sports and adventure. From adrenaline-pumping exploits to captivating narratives of triumph and resilience, this collection explores the diverse landscapes, challenges, and triumphs in the realm of athletic endeavors, pushing the boundaries of human potential and the spirit of adventure.',
         imageUrl: 'image2.jpg'
+      },
+      { id:2,
+        title: 'Title 3',
+        description: 'Embark on a thrilling journey through the world of sports and adventure. From adrenaline-pumping exploits to captivating narratives of triumph and resilience, this collection explores the diverse landscapes, challenges, and triumphs in the realm of athletic endeavors, pushing the boundaries of human potential and the spirit of adventure.',
+        imageUrl: 'image2.jpg'
+      },
+      { id:3,
+        title: 'Title 4',
+        description: 'Embark on a thrilling journey through the world of sports and adventure. From adrenaline-pumping exploits to captivating narratives of triumph and resilience, this collection explores the diverse landscapes, challenges, and triumphs in the realm of athletic endeavors, pushing the boundaries of human potential and the spirit of adventure.',
+        imageUrl: 'image2.jpg'
       }
 ]
 }
