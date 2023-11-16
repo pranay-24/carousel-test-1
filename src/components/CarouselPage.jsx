@@ -163,7 +163,7 @@ const CarouselPage = () => {
 
   const handleDescriptionSubmit = () => {
     console.log(inputData.descriptionInput)
-    const prompt = " Generate descriptive content of minimum 100 words for a presentation slide based on the following keywords: " + inputData.descriptionInput;
+    const prompt = " Generate descriptive content of minimum 30 words for a presentation slide based on the following keywords: " + inputData.descriptionInput;
     dispatch(fetchDescriptionAsync({inputDescription : prompt,
       index: currentSlideIndex }));
     //console.log(textData);
