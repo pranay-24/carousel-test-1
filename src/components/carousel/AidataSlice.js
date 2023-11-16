@@ -155,6 +155,16 @@ export const updateSlides= createAction (
               ;
         })
 
+        export const updateImage= createAction (
+          'Aidata/updateImage',
+          ({index,newImage}) => {
+              //console.log(newDescription,index);
+              return  {
+                  payload:{index,
+                  newImage}
+              }
+                ;
+          })
 
     export const fetchMockData= createAsyncThunk (
         "Aidata/fetchMockData",
@@ -225,6 +235,10 @@ export const AidataSlice = createSlice({
         const { index, newDescription } = action.payload;
       
         state.slides[index].description = newDescription;
+      })
+      .addCase(updateImage.fulfilled, (state,action)=>{
+        const {index , newImage} = action.payload;
+        state.slides[index].imageUrl = newImage;
       })
 }
 })

@@ -89,7 +89,7 @@ const SelectorBox = ({ background, fontColor1, fontColor2 }) => {
     ];
   
     return (
-      <div className="grid grid-cols-4 gap-10">
+      <div className="grid grid-cols-4 gap-3">
         {boxesData.map((box, index) => (
           <SelectorBox
             key={index}
