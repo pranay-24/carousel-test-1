@@ -9,23 +9,22 @@ status:"idle",
 currentIndex: 0,
 slides:[
     {   id:0,
-        title: 'Title 1',
-        description: ' Navigating the intricate pathways of career choices, skill development, and professional growth is vital in todays dynamic work landscape. This comprehensive guide delves into strategies, assessments, and resources to help you chart a fulfilling career path aligned with your aspirations and talents.',
+        title: '',
+        description: ' ',
         imageUrl: ''
       },
       { id:1,
-        title: 'Title 2',
-        description: 'Embark on a thrilling journey through the world of sports and adventure. From adrenaline-pumping exploits to captivating narratives of triumph and resilience, this collection explores the diverse landscapes, challenges, and triumphs in the realm of athletic endeavors, pushing the boundaries of human potential and the spirit of adventure.',
-        imageUrl: ''
+        title: '',
+        description: '',
       },
       { id:2,
-        title: 'Title 3',
-        description: 'Embark on a thrilling journey through the world of sports and adventure. From adrenaline-pumping exploits to captivating narratives of triumph and resilience, this collection explores the diverse landscapes, challenges, and triumphs in the realm of athletic endeavors, pushing the boundaries of human potential and the spirit of adventure.',
+        title: '',
+        description: '',
         imageUrl: ''
       },
       { id:3,
-        title: 'Title 4',
-        description: 'Embark on a thrilling journey through the world of sports and adventure. From adrenaline-pumping exploits to captivating narratives of triumph and resilience, this collection explores the diverse landscapes, challenges, and triumphs in the realm of athletic endeavors, pushing the boundaries of human potential and the spirit of adventure.',
+        title: '',
+        description: '',
         imageUrl: ''
       }
 ]
@@ -172,8 +171,12 @@ export const AidataSlice = createSlice({
         .addCase(fetchSlidesAsync.fulfilled, (state,action)=>{
           const slideData = action.payload;
           for(let i = 0; i < slideData.length; i++){
-            state.slides[i].title = slideData[i].title;
-            state.slides[i].description = slideData[i].description
+            const titleWithoutNumbering = slideData[i].title.replace(/^\d+:\s*/, '');
+            const titleWithoutQuotes = titleWithoutNumbering.replace(/"/g, '');
+
+            const contentWithoutKeyword = slideData[i].content.replace(/^Content:\s*/, '');
+            state.slides[i].title = titleWithoutQuotes;
+            state.slides[i].description = contentWithoutKeyword;
           }
         })
          .addCase (fetchMockData.fulfilled, (state,action)=>{
