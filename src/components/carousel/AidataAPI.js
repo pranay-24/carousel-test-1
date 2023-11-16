@@ -62,8 +62,31 @@ export function queryData2 (inputStatement)
     const requestData = {
       messages: [
         { role: "system", 
-        content: `You are a helpful assistant. Only use the functions you have been provided with. Your are given a statement like ${inputStatement}. Create content of 20 words for 4 presentation slides based on this statement. You can give content about the effect of the statement, reason for the statement, the impact of the statement. Also give titles to all 4 slides. Last slide will be about reaching out to author, or following his account for more details. `
-       },
+        // content: `You are a helpful assistant. Only use the functions you have been provided with. Your are given a statement like ${inputStatement}. Create content of 20 words for 4 presentation slides based on this statement. You can give content about the effect of the statement, reason for the statement, the impact of the statement. Also give titles to all 4 slides. Last slide will be about reaching out to author, or following his account for more details. Dont add keywords like impact, effect, reason but do give in the format Slide 1: Title : "/n" Content : "/n" , Slide 2: Title : "/n" Content: "/n", Slide 3: Title : "/n" Content: "/n" , Slide 4: Title : "/n"  Content: "/n" Dont give additional notes or  more information after the last content . `,
+       
+      content : `You are a helpful assistant. Only use the functions you have been provided with. You are given a statement like "${inputStatement}". Generate content for 4 presentation slides based on this statement, each containing a title and content of 30 words. Do not use keywords like impact, effect, or reason. Follow the format below:
+
+
+      Slide 1:
+      Title: [Your Title] 
+      Content: [Your Content]
+      
+      Slide 2:
+      Title: [Your Title] 
+      Content: [Your Content] 
+      
+      Slide 3:
+      Title: [Your Title]
+      Content: [Your Content]
+      
+      Slide 4:
+      Title: [Your Title] 
+      Content: [Your Content] 
+      
+      The last slide should be about reaching out to the author or following their account for more details. Do not add any additional notes or information after the last content of Slide 4.
+      
+      `
+      },
       ],
       functions: [
         

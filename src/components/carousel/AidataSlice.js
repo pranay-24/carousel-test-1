@@ -47,19 +47,43 @@ export const fetchSlidesAsync = createAsyncThunk (
 //console.log(response)
    const text =  response.choices[0].message.content
 //console.log(text)
-   let slides = text.split('Slide ');
 
-let slideData = [];
+const slides = text.match(/Slide \d+:[\s\S]+?Title: ([^\n]+)[\s\S]+?Content: ([^\n]+)/g);
 
-for(let i = 1; i < slides.length; i++) {
-   let slide = slides[i].split('\n\n');
-   let title = slide[0].trim();
-   let content = slide[1].trim();
-   slideData.push({title: title, content: content});
+if (!slides) {
+  console.error("No slides found in the response.");
+} else {
+  const slideData = slides.map((slide) => {
+    const titleMatch = slide.match(/Title: ([^\n]+)/);
+    const contentMatch = slide.match(/Content: ([^\n]+)/);
 
+    if (titleMatch && contentMatch) {
+      const title = titleMatch[1].trim();
+      const content = contentMatch[1].trim();
+      return { title, content };
+    } else {
+      console.error("Failed to extract title and content from a slide:", slide);
+      return { title: "", content: "" };
+    }
+  });
+
+  console.log(slideData);
+  return slideData;
 }
-console.log(slideData);
-return slideData;
+
+//    let slides = text.split('Slide ');
+
+// let slideData = [];
+
+// for(let i = 1; i < slides.length; i++) {
+//    let slide = slides[i].split('\n\n');
+//    let title = slide[0].trim();
+//    let content = slide[1].trim();
+//    slideData.push({title: title, content: content});
+
+// }
+// console.log(slideData);
+
   }
 )
 
@@ -171,12 +195,8 @@ export const AidataSlice = createSlice({
         .addCase(fetchSlidesAsync.fulfilled, (state,action)=>{
           const slideData = action.payload;
           for(let i = 0; i < slideData.length; i++){
-            const titleWithoutNumbering = slideData[i].title.replace(/^\d+:\s*/, '');
-            const titleWithoutQuotes = titleWithoutNumbering.replace(/"/g, '');
-
-            const contentWithoutKeyword = slideData[i].content.replace(/^Content:\s*/, '');
-            state.slides[i].title = titleWithoutQuotes;
-            state.slides[i].description = contentWithoutKeyword;
+            state.slides[i].title = slideData[i].title;
+            state.slides[i].description = slideData[i].content
           }
         })
          .addCase (fetchMockData.fulfilled, (state,action)=>{
