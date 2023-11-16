@@ -370,7 +370,7 @@ const CarouselPage = () => {
                     type="submit"
                     onClick={handleSubmit}
                   >
-                    Generate Title
+                    Rewrite Title
                   </button>
                 </div>
                 <div>
@@ -432,7 +432,7 @@ const CarouselPage = () => {
                     className="btn border bg-purple-200 hover:cursor-pointer"
                     onClick={handleDescriptionSubmit}
                   >
-                    Generate Description
+                    Rewrite Description
                   </button>
                 </div>
                 <div>
