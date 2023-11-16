@@ -204,17 +204,10 @@ const CarouselPage = () => {
 
   return (
     <>
-      <button
-        className="mt-10 mb-10  w-50 items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-        onClick={() => {
-          handleImageDownload();
-        }}
-      >
-        Download Slide as Image
-      </button>
-      <div>
+    <div className="mb-1">
+      <p>Enter a statement to generate thecontent for slides</p>
       <input
-                    className="border-grey-400 border p-2 focus:ring-1 focus:ring-blue-400"
+                    className="mt-3 border-grey-400 border p-2 focus:ring-1 focus:ring-blue-400"
                     type="text"
                     name="titleInput"
                     value={statement}
@@ -229,6 +222,16 @@ const CarouselPage = () => {
                   </button>
 
       </div>
+
+      <button
+        className="mt-10 mb-10  w-50 items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+        onClick={() => {
+          handleImageDownload();
+        }}
+      >
+        Download Slide as Image
+      </button>
+      
       <div>
         <button className="btn btn-primary" onClick={openTemplateModal}>
           Set Template
