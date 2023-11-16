@@ -97,8 +97,8 @@ const CarouselPage = () => {
       newImage: URL.createObjectURL(file),
     }
     ))
-    console.log(URL.createObjectURL(file));
-    console.log(e.target.files[0]);
+   //console.log(URL.createObjectURL(file));
+    //console.log(e.target.files[0]);
   };
 
   const handleChange = (e) => {
@@ -490,7 +490,7 @@ const CarouselPage = () => {
                   accept="image/*"
                   onChange={handleImageChange}
                 />
-                <div className="flex flex-shrink-0 justify-center items-center space-x-2">
+                {/* <div className="flex flex-shrink-0 justify-center items-center space-x-2">
                   <span
                     className=" border border-black px-5 py-1 active:bg-gray-400 hover:cursor-pointer"
                     onClick={() => {
@@ -512,7 +512,7 @@ const CarouselPage = () => {
                   >
                     Right
                   </span>
-                </div>
+                </div> */}
               </Disclosure.Panel>
             </>
           )}
