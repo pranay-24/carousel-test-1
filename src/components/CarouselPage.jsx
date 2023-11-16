@@ -18,6 +18,7 @@ import {
   updateTitle,
   updateDescription,
   fetchSlidesAsync,
+  updateImage,
 } from "./carousel/AidataSlice";
 import TemplateModal from "./TemplateModal";
 
@@ -91,6 +92,13 @@ const CarouselPage = () => {
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     setSelectedImage(URL.createObjectURL(file));
+    dispatch(updateImage({
+      index:currentSlideIndex,
+      newImage: URL.createObjectURL(file),
+    }
+    ))
+    console.log(URL.createObjectURL(file));
+    console.log(e.target.files[0]);
   };
 
   const handleChange = (e) => {
@@ -106,6 +114,7 @@ const CarouselPage = () => {
     dispatch(fetchSlidesAsync(statement));
   };
 
+  //const handle
   const handleTitleChange = () => {
 
     dispatch(

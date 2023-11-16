@@ -236,7 +236,7 @@ export const AidataSlice = createSlice({
       
         state.slides[index].description = newDescription;
       })
-      .addCase(updateImage.fulfilled, (state,action)=>{
+      .addCase(updateImage, (state,action)=>{
         const {index , newImage} = action.payload;
         state.slides[index].imageUrl = newImage;
       })
