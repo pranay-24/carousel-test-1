@@ -23,6 +23,25 @@ const CarouselSlides = ({currentSlide, showImage, showText}) => {
     classes.filter(Boolean).join("");
   };
   
+  useEffect(()=>{
+
+    const thirdWord = (textElement)=>{
+      var words = textElement.split(' ');
+  console.log(words)
+      // Ensure there are at least three words
+      if (words.length >= 3) {
+          // Wrap the third word in a span with the 'highlight' class
+          words[2] = '<span style={{color: selectedColor.fontColor2 }}>' + words[2] + '</span>';
+          console.log(words[2])
+         words.join(' ');
+         console.log(words)
+      }
+    }
+    thirdWord(slides[currentSlide].title)
+  },[slides,currentSlide  ])
+  
+
+  //const newTitle = thirdWord()
   return (
     <div>
       <section id="carousel_slide">
@@ -31,7 +50,7 @@ const CarouselSlides = ({currentSlide, showImage, showText}) => {
             <div className="flex justify-center items-center p-3" style={{ backgroundColor: selectedColor.background , }}>
              {showText && ( <div>
               <div>
-                <p className="font-sans text-xl w-[500px] text-center"
+                <p className="font-sans text-xl w-[500px] font-medium text-center"
                 style={{color:selectedColor.fontColor2}}
                 >
                   {slides[currentSlide].title}
@@ -50,7 +69,7 @@ const CarouselSlides = ({currentSlide, showImage, showText}) => {
               
 
               {showImage && slides[currentSlide].imageUrl && (
-                <div className="flex w-[450px] h-auto overflow-hidden">
+                <div className="flex w-[450px] h-auto p-10 overflow-hidden rounded-lg ">
                   <img
                     className={"rounded-2xl w-full "}
                     src={slides[currentSlide].imageUrl}
