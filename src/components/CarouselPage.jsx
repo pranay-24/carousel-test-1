@@ -591,8 +591,8 @@ export  function ImageGrid() {
 
   const handleClick = () => {
    // setSelectedImage(imageUrl);
-   console.log("box clicked")
-   console.log(currentSlideIndex )
+  // console.log("box clicked")
+  // console.log(currentSlideIndex )
     // Call the parent component's setImage callback with the imageUrl
     dispatch(
       updateImage({

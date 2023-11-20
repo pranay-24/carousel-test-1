@@ -251,7 +251,11 @@ export const selectDescription = (state,index)=> {
     const slide = selectSlideByIndex(state,index)
    return slide ?  slide.description : ""}
 
+export const selectFirstSlideImage = (state)=>{
+  const imageUrl = state.Aidata.slides[0].imageUrl
 
+ return imageUrl
+}
 export const selectSlideByIndex = (state, index) => state.Aidata.slides[index];
 
 export default AidataSlice.reducer;

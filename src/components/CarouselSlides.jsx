@@ -4,9 +4,14 @@ import React, { useState, useContext, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { SlideContext } from "./carousel/CarouselState";
 import Sidebar from "./Sidebar";
+import { selectFirstSlideImage } from "./carousel/AidataSlice";
 
 const CarouselSlides = ({ currentSlide, showImage, showText }) => {
   const { selectedColor } = useContext(SlideContext);
+
+  useEffect(()=>{
+console.log(selectFirstSlideImage)
+  },[selectFirstSlideImage])
   // const { currentSlide } = props.currentSlide;
   //console.log(showImage, showText);
   // useEffect(() => {
@@ -49,17 +54,26 @@ const CarouselSlides = ({ currentSlide, showImage, showText }) => {
 console.log(thirdWord(slides[currentSlide].title))
   }, [slides, currentSlide]);
 
+  const backgroundImageUrl = selectFirstSlideImage;
+  const transparency = 0.5;
+
+  const backgroundStyle = {
+    background: `linear-gradient(rgba(255, 255, 255, ${transparency}), rgba(255, 255, 255, ${transparency})), url(${backgroundImageUrl})`,
+    backgroundSize: 'cover',
+    backgroundColor: selectedColor.background,
+    // height: '300px',
+  };
   //const newTitle = thirdWord()
   return (
     <div>
       <section id="carousel_slide">
-        <div className="flex-col w-[1000px]">
+        <div className="flex-col w-[1000px]" >
           {slides.length > 0 &&
             currentSlide >= 0 &&
             currentSlide !== undefined && (
               <div
                 className="flex-col justify-center w-[500px] items-center p-3"
-                style={{ backgroundColor: selectedColor.background }}
+                style={backgroundStyle}
               >
                
                 {showText && (
