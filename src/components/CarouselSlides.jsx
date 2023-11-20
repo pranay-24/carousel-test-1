@@ -4,14 +4,14 @@ import React, { useState, useContext, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { SlideContext } from "./carousel/CarouselState";
 import Sidebar from "./Sidebar";
-import { selectFirstSlideImage } from "./carousel/AidataSlice";
+//import { selectFirstSlideImage } from "./carousel/AidataSlice";
 
 const CarouselSlides = ({ currentSlide, showImage, showText }) => {
   const { selectedColor } = useContext(SlideContext);
-
+  const firstImage = useSelector((state) => state.Aidata.slides[0].imageUrl);
   useEffect(()=>{
-console.log(selectFirstSlideImage)
-  },[selectFirstSlideImage])
+console.log(firstImage)
+  },[firstImage])
   // const { currentSlide } = props.currentSlide;
   //console.log(showImage, showText);
   // useEffect(() => {
@@ -23,7 +23,7 @@ console.log(selectFirstSlideImage)
   const slides = useSelector((state) => state.Aidata.slides);
   // const currentSlideIndex = useSelector((state) => state.Aidata.currentIndex);
   const dispatch = useDispatch();
-
+ 
   const classNames = (...classes) => {
     classes.filter(Boolean).join("");
   };
@@ -54,15 +54,25 @@ console.log(selectFirstSlideImage)
 console.log(thirdWord(slides[currentSlide].title))
   }, [slides, currentSlide]);
 
-  const backgroundImageUrl = selectFirstSlideImage;
-  const transparency = 0.5;
+  const backgroundImageUrl = firstImage;
+  const transparency = 0.85;
 
   const backgroundStyle = {
-    background: `linear-gradient(rgba(255, 255, 255, ${transparency}), rgba(255, 255, 255, ${transparency})), url(${backgroundImageUrl})`,
-    backgroundSize: 'cover',
+    position: 'relative',
     backgroundColor: selectedColor.background,
-    // height: '300px',
+    minHeight : '600px', // Adjust the height as needed
   };
+  
+  const overlayStyle = {
+    content: '""',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    background: `linear-gradient(rgba(255, 255, 255, ${transparency}), rgba(255, 255, 255, ${transparency})),url(${backgroundImageUrl})`,
+  };
+  
   //const newTitle = thirdWord()
   return (
     <div>
@@ -72,12 +82,14 @@ console.log(thirdWord(slides[currentSlide].title))
             currentSlide >= 0 &&
             currentSlide !== undefined && (
               <div
-                className="flex-col justify-center w-[500px] items-center p-3"
+                className="flex-col justify-center w-[500px] items-center p-3 border border-gray-500 shadow-md"
                 style={backgroundStyle}
               >
-               
+               <div style={overlayStyle}>
+
+              
                 {showText && (
-                  <div style={{ minHeight: "400px"  }}
+                  <div style={{ minHeight: "300px"  }}
                   
                   >
                     {slides[currentSlide].title && (
@@ -113,6 +125,7 @@ console.log(thirdWord(slides[currentSlide].title))
                     />
                   </div>
                 )}
+                 </div>
               </div>
             )}
         </div>

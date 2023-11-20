@@ -11,7 +11,8 @@ slides:[
     {   id:0,
         title: '',
         description: ' ',
-        imageUrl: ''
+        imageUrl: '',
+        
       },
       { id:1,
         title: '',
