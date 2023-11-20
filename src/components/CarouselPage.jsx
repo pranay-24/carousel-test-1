@@ -19,8 +19,13 @@ import {
   updateDescription,
   fetchSlidesAsync,
   updateImage,
+ 
 } from "./carousel/AidataSlice";
+
+import { fetchImageAsync, } from "./carousel/ImageSlice";
+
 import TemplateModal from "./TemplateModal";
+//import ImageGrid from "./ImageGrid";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -63,6 +68,7 @@ const CarouselPage = () => {
   const [showImage, setShowImage] = useState(false);
   const [showText, setShowText] = useState(true);
 
+  const [imageKeyword,setImageKeyword] = useState('car')
   const [isTitleChecked, setIsTitleChecked] = useState(true);
   const [isDescriptionChecked, setIsDescriptionChecked] = useState(true);
   const [activeOption, setActiveOption] = useState("");
@@ -104,6 +110,16 @@ const CarouselPage = () => {
   const handleChange = (e) => {
     setInputData({ ...inputData, [e.target.name]: e.target.value });
   };
+
+  const handleImageKeywordChange = (e)=>{
+    setImageKeyword(e.target.value);
+  }
+
+  const handleImageKeywordSubmit = () => {
+
+     console.log(imageKeyword)
+      dispatch(fetchImageAsync(imageKeyword));
+    };
 
   const handleStatementChange = (e) => {
     setStatement(e.target.value);
@@ -214,7 +230,7 @@ const CarouselPage = () => {
   return (
     <>
     <div className="mb-1">
-      <p>Enter a statement to generate thecontent for slides</p>
+      <h3>Enter a statement to generate thecontent for slides</h3>
       <input
                     className="mt-3 border-grey-400 border p-2 focus:ring-1 focus:ring-blue-400"
                     type="text"
@@ -490,6 +506,26 @@ const CarouselPage = () => {
                   accept="image/*"
                   onChange={handleImageChange}
                 />
+                <h3 className="mt-2"
+                >Or Search Unsplash for images</h3>
+
+                <input
+                    className="mt-3 border-grey-400 border p-2 focus:ring-1 focus:ring-blue-400"
+                    type="text"
+                    name="imageKeyword"
+                    value={imageKeyword}
+                    onChange={handleImageKeywordChange}
+                  />
+                  <button
+                    className="btn border bg-purple-200 hover:cursor-pointer"
+                    type="submit"
+                    onClick={handleImageKeywordSubmit}
+                  >
+                    Generate Slides
+                  </button>
+
+                  <ImageGrid />
+
                 {/* <div className="flex flex-shrink-0 justify-center items-center space-x-2">
                   <span
                     className=" border border-black px-5 py-1 active:bg-gray-400 hover:cursor-pointer"
@@ -523,3 +559,60 @@ const CarouselPage = () => {
 };
 
 export default CarouselPage;
+
+export  function ImageGrid() {
+  const images = useSelector((state) => state.ImageData.images);
+   const status = useSelector((state) => state.ImageData.status);
+   //const images =['http://abc1','http://abc2','http://abc3','http://abc4','http://abc4','http://abc5']
+ //console.log(images)
+   // if (status === "loading") {
+   //   return <div>Loading...</div>;
+   // }
+ 
+   return (
+     <div className="flex gap-2 overflow-x-scroll">
+     {images.map((image, index) => {
+      // console.log( "Image url is ", image)
+       return  <ImageBox key={index} imageUrl={image} />
+     }
+       
+      
+     
+     )
+     }
+   </div>
+ 
+   )
+ }
+ 
+ export const ImageBox = ({imageUrl, setSelectedImage})=>{
+  const dispatch = useDispatch(); 
+  const currentSlideIndex = useSelector((state) => state.Aidata.currentIndex);
+
+  const handleClick = () => {
+   // setSelectedImage(imageUrl);
+   console.log("box clicked")
+   console.log(currentSlideIndex )
+    // Call the parent component's setImage callback with the imageUrl
+    dispatch(
+      updateImage({
+      index: currentSlideIndex,
+      newImage: imageUrl,
+    }
+    ))
+
+ 
+  };
+
+   return (
+     <div className="flex w-[200px] h-auto p-1 overflow-hidden rounded-lg " onClick={handleClick}>
+       {/* <p>{imageUrl}</p> */}
+     <img
+       className={"rounded-xl w-full "}
+       src={imageUrl}
+       alt=""
+     />
+   </div>
+   )
+ 
+ }

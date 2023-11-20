@@ -1,10 +1,10 @@
 export function queryImage(inputKeyword){
+    //console.log(inputKeyword)
     return new Promise( async (resolve,reject)=>{
 const requestOption = {
     method:"GET",
     headers: {
         "Content-type": "application/json",
-        
     },
  
 }

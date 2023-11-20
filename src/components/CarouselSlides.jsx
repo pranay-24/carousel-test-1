@@ -5,10 +5,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { SlideContext } from "./carousel/CarouselState";
 import Sidebar from "./Sidebar";
 
-const CarouselSlides = ({currentSlide, showImage, showText}) => {
+const CarouselSlides = ({ currentSlide, showImage, showText }) => {
   const { selectedColor } = useContext(SlideContext);
- // const { currentSlide } = props.currentSlide;
- //console.log(showImage, showText);
+  // const { currentSlide } = props.currentSlide;
+  //console.log(showImage, showText);
   // useEffect(() => {
   //   // Perform actions upon selectedColor change
   //   // This will run every time selectedColor changes
@@ -22,64 +22,85 @@ const CarouselSlides = ({currentSlide, showImage, showText}) => {
   const classNames = (...classes) => {
     classes.filter(Boolean).join("");
   };
-  
-  useEffect(()=>{
+  const [modifiedTitle, setModifiedTitle] = useState("");
 
-    const thirdWord = (textElement)=>{
-      var words = textElement.split(' ');
-  console.log(words)
+  useEffect(() => {
+    const thirdWord = (textElement) => {
+      var words = textElement.split(" ");
+    //  console.log(words)
       // Ensure there are at least three words
       if (words.length >= 3) {
-          // Wrap the third word in a span with the 'highlight' class
-          words[2] = '<span style={{color: selectedColor.fontColor2 }}>' + words[2] + '</span>';
-          console.log(words[2])
-         words.join(' ');
-         console.log(words)
+        // Wrap the third word in a span with the 'highlight' class
+        //console.log(selectedColor.fontColor1)
+        words[2] =
+        "<span style='color: " + selectedColor.fontColor2 + "'>" +
+        words[2] +
+        "</span>";
+       // console.log(words[2]);
+        textElement =   words.join(" ");
+       // console.log(textElement);
       }
-    }
-    thirdWord(slides[currentSlide].title)
-  },[slides,currentSlide  ])
-  
+      return textElement;
+
+    };
+
+    setModifiedTitle(thirdWord(slides[currentSlide].title));
+
+console.log(thirdWord(slides[currentSlide].title))
+  }, [slides, currentSlide]);
 
   //const newTitle = thirdWord()
   return (
     <div>
       <section id="carousel_slide">
         <div className="flex-col w-[1000px]">
-          {slides.length > 0 && currentSlide >= 0 && currentSlide !== undefined && (
-            <div className="flex justify-center items-center p-3" style={{ backgroundColor: selectedColor.background , }}>
-             {showText && ( <div>
-              <div>
-                <p className="font-sans text-xl w-[500px] font-medium text-center"
-                style={{color:selectedColor.fontColor2}}
-                >
-                  {slides[currentSlide].title}
-                </p>
-              </div>
-             
-              <div>
-                <p
-                  className="font-sans text-lg w-[500px]"
-                  style={{ color: selectedColor.fontColor1 }}
-                >
-                  {slides[currentSlide].description}
-                </p>
-              </div>
-              </div> )}
-              
+          {slides.length > 0 &&
+            currentSlide >= 0 &&
+            currentSlide !== undefined && (
+              <div
+                className="flex-col justify-center w-[500px] items-center p-3"
+                style={{ backgroundColor: selectedColor.background }}
+              >
+               
+                {showText && (
+                  <div style={{ minHeight: "400px"  }}
+                  
+                  >
+                    {slides[currentSlide].title && (
+                      <div
+                      className= "tracking-widest font-sans text-xl w-[500px] text-center"
+                      style={{ color: selectedColor.fontColor1 }}
+                      dangerouslySetInnerHTML={{ __html: modifiedTitle }}
+                      />
+                        
+                      
+                    )}
 
-              {showImage && slides[currentSlide].imageUrl && (
-                <div className="flex w-[450px] h-auto p-10 overflow-hidden rounded-lg ">
-                  <img
-                    className={"rounded-2xl w-full "}
-                    src={slides[currentSlide].imageUrl}
-                    alt=""
-                  />
-                </div>
-              )}
-           
-            </div>
-          )}
+                    {slides[currentSlide].description && (
+                      <div>
+                        <p
+                          className="tracking-wide font-sans text-lg w-[500px] text-center"
+                          style={{ color: selectedColor.fontColor1 }}
+                        >
+                          {slides[currentSlide].description}
+                        </p>
+                      </div>
+                    )}
+
+                  </div>
+                )}
+
+                {showImage && slides[currentSlide].imageUrl && (
+                  <div className="flex w-[450px] h-300px p-10 overflow-hidden rounded-lg ">
+                    <img
+                      className={"rounded-2xl w-full h-full object-cover"}
+                      src={slides[currentSlide].imageUrl}
+                      alt=""
+                    />
+                  </div>
+                )}
+              </div>
+            )}
         </div>
       </section>
     </div>
