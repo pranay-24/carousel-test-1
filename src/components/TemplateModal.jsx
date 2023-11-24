@@ -84,7 +84,7 @@ const SelectorBox = ({ background, fontColor1, fontColor2 }) => {
       { background: '#eeeeee', fontColor1: '#212121', fontColor2: '#fbc02d' },
       { background: '#f1f8e9', fontColor1: '#37474f', fontColor2: '#ff9800' },
 
-      // Add more boxes as needed
+      // Add more boxes as needed by you
       
     ];
   
