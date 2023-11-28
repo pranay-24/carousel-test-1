@@ -230,9 +230,10 @@ const CarouselPage = () => {
 
   return (
     <>
-       <Button color="primary" variant="faded">
+       <Button color="primary"  >
         Faded
       </Button>  
+      
     <div className="mb-1">
       <h3>Enter a statement to generate thecontent for slides</h3>
       <input
