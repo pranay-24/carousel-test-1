@@ -5,13 +5,16 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import { store } from './app/Store.js';
+import {NextUIProvider} from '@nextui-org/react'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+     <NextUIProvider>
       <Provider store={store}>
     <App />
     </Provider>
+    </NextUIProvider>
   </React.StrictMode>
 );
 
