@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import { StarIcon } from "@heroicons/react/20/solid";
 import html2canvas from "html2canvas";
+import {Button} from "@nextui-org/react";
 
 import { Disclosure } from "@headlessui/react";
 import { ChevronUpIcon } from "@heroicons/react/20/solid";
@@ -229,6 +230,9 @@ const CarouselPage = () => {
 
   return (
     <>
+       <Button color="primary" variant="faded">
+        Faded
+      </Button>  
     <div className="mb-1">
       <h3>Enter a statement to generate thecontent for slides</h3>
       <input
