@@ -521,7 +521,7 @@ const CarouselPage = () => {
                     type="submit"
                     onClick={handleImageKeywordSubmit}
                   >
-                    Generate Slides
+                    Search Unsplash
                   </button>
 
                   <ImageGrid />
