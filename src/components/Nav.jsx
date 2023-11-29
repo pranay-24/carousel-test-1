@@ -4,7 +4,7 @@ import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button} from "@nex
 export default function Nav() {
   return (
     <div>
-      <Navbar>
+      <Navbar isBordered >
       <NavbarBrand>
         {/* <AcmeLogo /> */}
         <p className="font-bold text-inherit">Carousel Using AI</p>
